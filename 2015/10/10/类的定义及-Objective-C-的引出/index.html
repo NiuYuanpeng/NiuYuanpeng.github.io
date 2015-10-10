@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>类的定义及 Objective-C 的引出 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="类什么是类
+类是一组具有相同特征的和行为的事物的抽象的集合.
+也就是我们通常所说的”类型”.
+类是抽象的,并不具体指某一个人,而是泛指某一堆人
+
+什么是对象
+对象就是类的实例.
+世间万物全是对象,生活中,一只猫、一条狗、一个订单、一张火车票等都是对象。
+
+Objective－C Objective-C 是一种能够完成复杂面向对象编程的简单地计算机设计语言.通过提供用于定义类和方法的语法,它扩展了标">
+<meta property="og:type" content="article">
+<meta property="og:title" content="类的定义及 Objective-C 的引出">
+<meta property="og:url" content="http://yoursite.com/2015/10/10/类的定义及-Objective-C-的引出/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="类什么是类
+类是一组具有相同特征的和行为的事物的抽象的集合.
+也就是我们通常所说的”类型”.
+类是抽象的,并不具体指某一个人,而是泛指某一堆人
+
+什么是对象
+对象就是类的实例.
+世间万物全是对象,生活中,一只猫、一条狗、一个订单、一张火车票等都是对象。
+
+Objective－C Objective-C 是一种能够完成复杂面向对象编程的简单地计算机设计语言.通过提供用于定义类和方法的语法,它扩展了标">
+<meta property="og:updated_time" content="2015-10-10T03:44:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="类的定义及 Objective-C 的引出">
+<meta name="twitter:description" content="类什么是类
+类是一组具有相同特征的和行为的事物的抽象的集合.
+也就是我们通常所说的”类型”.
+类是抽象的,并不具体指某一个人,而是泛指某一堆人
+
+什么是对象
+对象就是类的实例.
+世间万物全是对象,生活中,一只猫、一条狗、一个订单、一张火车票等都是对象。
+
+Objective－C Objective-C 是一种能够完成复杂面向对象编程的简单地计算机设计语言.通过提供用于定义类和方法的语法,它扩展了标">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-类的定义及-Objective-C-的引出" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/10/类的定义及-Objective-C-的引出/" class="article-date">
+  <time datetime="2015-10-10T03:41:24.000Z" itemprop="datePublished">2015-10-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      类的定义及 Objective-C 的引出
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="类">类</h1><h3 id="什么是类">什么是类</h3><ul>
+<li>类是一组具有相同特征的和行为的事物的抽象的集合.</li>
+<li>也就是我们通常所说的”类型”.</li>
+<li>类是抽象的,并不具体指某一个人,而是泛指某一堆人</li>
+</ul>
+<h3 id="什么是对象">什么是对象</h3><ul>
+<li>对象就是<strong>类</strong>的实例.</li>
+<li>世间万物全是对象,生活中,一只猫、一条狗、一个订单、一张火车票等都是对象。</li>
+</ul>
+<h1 id="Objective－C">Objective－C</h1><p> Objective-C 是一种能够完成复杂面向对象编程的简单地计算机设计语言.<br>通过提供用于定义类和方法的语法,它扩展了标准的 ANSIC 程序设计语言.它还提供了类和接口(任何类可采用的)的动态扩展.</p>
+<h3 id="特点">特点</h3><ul>
+<li>定义新的类</li>
+<li>类的实例和方法</li>
+<li>方法调用(成为发消息)</li>
+<li>属性声明(以及通过他们自动合成存取方法)</li>
+<li>静态和动态类型化</li>
+<li>块( block), 已封装的、可在任何时候执行多段代码</li>
+<li>基本语言的扩展，例如协议和类别</li>
+</ul>
+<h3 id="如何定义_OC_中的一个类">如何定义 OC 中的一个类</h3><ul>
+<li>Objective-C中某个类的规格需要两个不同的部分: <strong>接口</strong>和<strong>实现</strong>。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>扩展名</th>
+<th>源文件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.h</td>
+<td>头文件.头文件包含类、类型、函数和常量声明</td>
+</tr>
+<tr>
+<td>.m</td>
+<td>.m 实现文件.具有此扩展名的文件可以同时包含 Objective-C 代码和 C 代码.有时也称为源文件.</td>
+</tr>
+<tr>
+<td>.mm</td>
+<td>.mm 实现文件.具有此扩展名的实现文件,除了包含 Objective-C 代码和 C 代码以外,还可以包含 C++代码.仅当您实际引用您的 Objective-C 代码中的 C++类或功能时,才使用此扩展名.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="类的声明实例">类的声明实例</h3><p>下列框图的语法声明名为<strong>MyClass</strong>的类，它是从基础类（或根类）<strong>NSObjiect</strong>继承而来的.(根类是供其他类直接或间接集成的类.) 类声明以编译器指令<strong>@ interface</strong> 开始,以<strong>@ end</strong> 指令结束. 类名称后面(以冒号分隔),是父类的名称.</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="at_rule">@<span class="keyword">interface</span> MyClass : NSObject</span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="tag">int</span>    <span class="tag">count</span>;</span><br><span class="line">	<span class="tag">id</span>      <span class="rule"><span class="attribute">data</span>:<span class="value"></span><br><span class="line">	NSString* name</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">-</span>  (<span class="tag">id</span>)<span class="rule"><span class="attribute">initWithString </span>:<span class="value"> (NSString*)aName</span></span>;</span><br><span class="line">+  (<span class="tag">MyClass</span>*)<span class="rule"><span class="attribute">createMyClassWithString </span>:<span class="value"> (NSString*)aName</span></span>;</span><br><span class="line"><span class="at_rule">@<span class="keyword">end</span></span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/10/10/类的定义及-Objective-C-的引出/" data-id="cifkjyw7z0002axnoh0buxnuq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/10/10/面向对象术语/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          面向对象术语
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/10/10/类别的扩展-续/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">类别的扩展_续</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/10/10/常用快捷操作/">常用快捷操作</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/10/uiview常用属性和方法/">uiview常用属性和方法</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/10/KVO-概述及用法/">KVO 概述及用法</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/10/KVC-概述/">KVC 概述</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/10/KVC-补充及实例/">KVC 补充及实例</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

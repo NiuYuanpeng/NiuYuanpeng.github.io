@@ -5,16 +5,22 @@
   
   <title>fscanf 函数(非本人) | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
+  <meta name="description" content="fscanf 函数的用法以前解析有规律的文件的时候要么用正则表达式，要么就是傻傻的自己写程序来解析有规律的文件。今天突然发现c的库函数中有一个现成的可以解析有规律的文件的函数，就是fscanf（）函数。难过哎 以前自己做了这么多无用功，在这里详细解析一下fscanf函数：
+fscanf（）函数（有点像正则表达式）：
+功 能: 从一个流中执行格式化输入,fscanf遇到空格和换行时结束，注意空格时也">
 <meta property="og:type" content="article">
 <meta property="og:title" content="fscanf 函数(非本人)">
 <meta property="og:url" content="http://yoursite.com/2015/10/10/fscanf-函数-非本人/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description">
-<meta property="og:updated_time" content="2015-10-10T03:46:22.000Z">
+<meta property="og:description" content="fscanf 函数的用法以前解析有规律的文件的时候要么用正则表达式，要么就是傻傻的自己写程序来解析有规律的文件。今天突然发现c的库函数中有一个现成的可以解析有规律的文件的函数，就是fscanf（）函数。难过哎 以前自己做了这么多无用功，在这里详细解析一下fscanf函数：
+fscanf（）函数（有点像正则表达式）：
+功 能: 从一个流中执行格式化输入,fscanf遇到空格和换行时结束，注意空格时也">
+<meta property="og:updated_time" content="2015-10-10T09:06:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="fscanf 函数(非本人)">
-<meta name="twitter:description">
+<meta name="twitter:description" content="fscanf 函数的用法以前解析有规律的文件的时候要么用正则表达式，要么就是傻傻的自己写程序来解析有规律的文件。今天突然发现c的库函数中有一个现成的可以解析有规律的文件的函数，就是fscanf（）函数。难过哎 以前自己做了这么多无用功，在这里详细解析一下fscanf函数：
+fscanf（）函数（有点像正则表达式）：
+功 能: 从一个流中执行格式化输入,fscanf遇到空格和换行时结束，注意空格时也">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -82,11 +88,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="fscanf_函数的用法">fscanf 函数的用法</h3><p>以前解析有规律的文件的时候要么用正则表达式，要么就是傻傻的自己写程序来解析有规律的文件。今天突然发现c的库函数中有一个现成的可以解析有规律的文件的函数，就是fscanf（）函数。难过哎 以前自己做了这么多无用功，在这里详细解析一下fscanf函数：</p>
+<p>fscanf（）函数（有点像正则表达式）：</p>
+<p>功 能: 从一个流中执行格式化输入,fscanf遇到空格和换行时结束，注意空格时也结束。</p>
+<p>用 法:int fscanf(FILE <em>stream, char </em>format,[argument…]);</p>
+<p>int fscanf(文件指针，格式字符串，输入列表);</p>
+<p>　　for example:</p>
+<p>　　FILE*fp;</p>
+<p>　　chara[10];</p>
+<p>　　intb;</p>
+<p>　　doublec;</p>
+<p>　　fscanf(fp,”%s%d%lf”,a,&amp;b,&amp;c)</p>
+<p>　　返回值：整型，数值等于[argument…]的个数</p>
+<p>其中的format就是相当于正则表达式中的格式，即用什么样的格式来分隔文件中的信息。光说不好理解，一下用一个例子来说明具体怎么用：</p>
+<p>首先我有一个data。txt的文件里面的数据格式如下：</p>
+<p>2,50,41,w,20.585828</p>
+<p>4,52,51,r,52.012547</p>
+<p>…………………….</p>
+<p> 许多条类似的记录，都是以，来分隔的</p>
+<p>…………………..</p>
+<p>我实现的功能就是把上面文件中的数据的五个字段赋值给相应的五个变量，并且输出这些变量的值。实现的程序如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> fd;</span><br><span class="line">  <span class="keyword">long</span> dev;</span><br><span class="line">  <span class="keyword">long</span> offset;</span><br><span class="line">  <span class="keyword">long</span> length;</span><br><span class="line">  <span class="keyword">char</span> ch;</span><br><span class="line">  <span class="keyword">double</span> ts=<span class="number">0.000000</span>;</span><br><span class="line">  <span class="keyword">if</span>((fd=fopen(<span class="string">"/home/haixian/ceshi/data.txt"</span>,<span class="string">"r"</span>))&lt;<span class="number">0</span>)</span><br><span class="line">   &#123;</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">"open the file is error!\n"</span>);</span><br><span class="line">     <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">   &#125;</span><br><span class="line">  lseek(fd,<span class="number">0</span>,SEEK_SET);</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  <span class="keyword">while</span>(<span class="number">5</span>==<span class="built_in">fscanf</span>(fd,<span class="string">"%ld,%ld,%ld,%c,%lf\n"</span>,&amp;dev,&amp;offset,&amp;length,&amp;ch,&amp;ts))</span><br><span class="line">  &#123;在这里就是第二个参数指定分隔参数的格式，在这里使用的是，来分隔。这样就很容易的获取了记录的各个字段的值并不需要自己编写函数来进行解析什么的。</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">"%ld,%ld,%ld,%c,%lf\n"</span>,dev,offset,length,ch,ts);</span><br><span class="line">  &#125;</span><br><span class="line">close(fd);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过上面的例子能很好的理解fscanf函数的用法。以前自己写程序解析这种文件，费力还不讨好，得出的结果还不准确。哎 只能感叹我太弱了，以后还得好好学习！！！！</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/10/fscanf-函数-非本人/" data-id="cifkjyw9d000paxno4bmu7vk8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/10/fscanf-函数-非本人/" data-id="cifkv25jk000oq5no5ycg1f5p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -129,7 +157,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 

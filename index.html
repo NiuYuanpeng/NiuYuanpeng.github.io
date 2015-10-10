@@ -122,7 +122,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/10/常用快捷操作/" data-id="cifkjyw8j000aaxnoefqeijav" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/10/常用快捷操作/" data-id="cifkv25ib0009q5noa6ozgxz4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -158,7 +158,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/10/uiview常用属性和方法/" data-id="cifkjyw91000jaxno1h12r7ka" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/10/uiview常用属性和方法/" data-id="cifkv25ix000iq5nonjq3nfho" class="article-share-link">Share</a>
       
       
     </footer>
@@ -194,7 +194,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/10/KVO-概述及用法/" data-id="cifkjyw9m000taxnolnjy54lo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/10/KVO-概述及用法/" data-id="cifkv25jv000sq5noxjcfn1m8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -230,7 +230,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/10/KVC-概述/" data-id="cifkjyw9p000vaxnoykm13l7a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/10/KVC-概述/" data-id="cifkv25jz000uq5nos69llxs2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -266,7 +266,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/10/KVC-补充及实例/" data-id="cifkjyw9n000uaxno3iwigi0l" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/10/KVC-补充及实例/" data-id="cifkv25jx000tq5nox61moexd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -302,7 +302,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/10/iphone开发概述/" data-id="cifkjyw92000kaxnolsss6nvi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/10/iphone开发概述/" data-id="cifkv25j0000jq5nop8uv8ez6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -338,7 +338,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/10/iphone-应用程序开发-uiview/" data-id="cifkjyw94000laxno1qfdbepx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/10/iphone-应用程序开发-uiview/" data-id="cifkv25j1000kq5noywjexkyf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -370,11 +370,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="iOS_多线程技术2">iOS 多线程技术2</h2><h3 id="NSOperation">NSOperation</h3><hr>
+<ul>
+<li><strong>NSInvocationOperation</strong></li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个队列</span></span><br><span class="line">NSOperationQueue *queue = [[NSOperationQueue alloc] init];</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建子任务,定义子任务必须是 NSOperation 的子类</span></span><br><span class="line">NSInvocationOperation *op = [[NSInvocationOperation alloc] <span class="string">initWithTarget:</span>self <span class="string">selector:</span><span class="annotation">@selector</span>(<span class="string">dosomething:</span>) <span class="string">object:</span>@<span class="string">"NSInvocationOperation"</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">//当把任务添加到队列后,自动开启线程</span></span><br><span class="line">[queue <span class="string">addOperation:</span>op];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>NSBlockOperation</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">   		<span class="comment">//创建一个队列</span></span><br><span class="line"><span class="built_in">NSOperationQueue</span> *queue = [[<span class="built_in">NSOperationQueue</span> alloc] init];</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建 NSBlockOperation 对象</span></span><br><span class="line"><span class="built_in">NSBlockOperation</span> *operation = [<span class="built_in">NSBlockOperation</span> blockOperationWithBlock:^&#123;</span><br><span class="line">[<span class="keyword">self</span> doSomething];</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line"><span class="comment">//加入队列</span></span><br><span class="line">[queue addOperat:operation];</span><br></pre></td></tr></table></figure>
+<p>Demo:<br>下面我用NSOperation 的两种方法来创建一个例子,实现与上篇一样的功能,</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"ViewController.h"</span></span></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="keyword">IBOutlet</span> <span class="built_in">UIImageView</span> *iamgeView;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="keyword">IBOutlet</span> <span class="built_in">UILabel</span> *lable;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSOperationQueue</span> *queue;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 1.NSInvocationOperation</span></span><br><span class="line">    <span class="built_in">NSInvocationOperation</span> *op = [[<span class="built_in">NSInvocationOperation</span> alloc] initWithTarget:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(dosomething:) object:<span class="string">@"NSInvocationOperation"</span>];</span><br><span class="line">    op<span class="variable">.name</span> = <span class="string">@"xiaoming"</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSOperationQueue</span> *queue = [[<span class="built_in">NSOperationQueue</span> alloc] init];</span><br><span class="line">    [queue addOperation:op];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,queue<span class="variable">.operations</span>);</span><br><span class="line">    _queue = queue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)dosomething:(<span class="built_in">NSString</span>*)str</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">//耗时操作</span></span><br><span class="line">    [<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">3</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//需要在主线程中更新 UI</span></span><br><span class="line">    [<span class="keyword">self</span> performSelectorOnMainThread:<span class="keyword">@selector</span>(updateLable:) withObject:str waitUntilDone:<span class="literal">YES</span>];</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)updateLable:(<span class="built_in">NSString</span>*)str</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> ([[<span class="built_in">NSThread</span> currentThread] isMainThread]) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"主线程&gt;&gt;&gt;%s"</span>,__func__);</span><br><span class="line">    &#125;</span><br><span class="line">    _lable<span class="variable">.text</span> = str;</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">IBAction</span>)btnAction:(<span class="built_in">UIButton</span> *)sender &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSBlockOperation</span> *blockOp = [<span class="built_in">NSBlockOperation</span> blockOperationWithBlock:^&#123;</span><br><span class="line">        <span class="comment">//耗时操作</span></span><br><span class="line">        [<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">3</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//创建 url</span></span><br><span class="line">        <span class="built_in">NSString</span> *urlStr = <span class="string">@"http://img.hb.aicdn.com/5a8f57157b47284724d09ffd2da28369731f8144ac9c-1XdZKJ_fw658"</span>;</span><br><span class="line">        <span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:urlStr];</span><br><span class="line">        <span class="built_in">NSData</span> *data = [<span class="built_in">NSData</span> dataWithContentsOfURL:url];</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageWithData:data];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//更新 UI</span></span><br><span class="line">        [<span class="keyword">self</span> performSelectorOnMainThread:<span class="keyword">@selector</span>(updateImageView:) withObject:image waitUntilDone:<span class="literal">YES</span>];</span><br><span class="line">    &#125;];</span><br><span class="line">    [_queue addOperation:blockOp];</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)updateImageView:(<span class="built_in">UIImage</span>*)img</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> ([[<span class="built_in">NSThread</span> currentThread] isMainThread]) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"主线程&gt;&gt;&gt;&gt;&gt;&gt;%s"</span>,__FUNCTION__);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    _iamgeView<span class="variable">.image</span> = img;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>运行结果:<br>2015-08-02 15:03:33.909 05-NSOperationDemo[3284:874300] (<br>    “<nsinvocationoperation: 0x7fb731d743b0="">{name = ‘xiaoming’}”<br>)<br>2015-08-02 15:03:36.911 05-NSOperationDemo[3284:874300] 主线程&gt;&gt;&gt;-[ViewController updateLable:]<br>2015-08-02 15:03:47.730 05-NSOperationDemo[3284:874300] 主线程&gt;&gt;&gt;&gt;&gt;&gt;-[ViewController updateImageView:]</nsinvocationoperation:></p>
+<p>/Users/qingyun/Desktop/屏幕快照 2015-08-02 15.10.49.png</p>
+<hr>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/10/ios-多线程技术2/" data-id="cifkjyw95000maxnowa7lnhpp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/10/ios-多线程技术2/" data-id="cifkv25j3000lq5no7fatq2de" class="article-share-link">Share</a>
       
       
     </footer>
@@ -406,11 +421,49 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="iOS_多线程技术1">iOS 多线程技术1</h2><hr>
+<p>iOS 有三种多线程编程技术:</p>
+<ul>
+<li>NSThread</li>
+<li>NSOperation</li>
+<li>GCD</li>
+</ul>
+<p>它们的抽象程度由低到高,越高的使用起来越简单.</p>
+<h3 id="NSThread">NSThread</h3><h4 id="显示调用_NSthread_类">显示调用 NSthread 类</h4><hr>
+<ul>
+<li><strong>类方法</strong></li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="typename">void</span>)<span class="string">detachNewThreadSelector:</span>(SEL)selector <span class="string">toTarget:</span>(id)target <span class="string">withObject:</span>(id)argument;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>实例方法</strong></li>
+</ul>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp">- <span class="params">(instancetype)</span>initWithTarget:<span class="params">(id)</span>target selector:<span class="params">(<span class="variable">SEL</span>)</span>selector object:<span class="params">(id)</span>argument</span><br><span class="line"> [thread start]</span></span><br></pre></td></tr></table></figure>
+<h3 id="隐式调用">隐式调用</h3><hr>
+<ul>
+<li><strong>开启后台线程</strong></li>
+</ul>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp">- <span class="params">(void)</span>performSelectorInBackground:<span class="params">(<span class="variable">SEL</span>)</span>aSelector withObject:<span class="params">(id)</span>arg</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>在主线程中运行</strong></li>
+</ul>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp">- <span class="params">(void)</span>performSelectorOnMainThread:<span class="params">(<span class="variable">SEL</span>)</span>aSelector withObject:<span class="params">(id)</span>arg waitUntilDone:<span class="params">(<span class="variable">BOOL</span>)</span>wait</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>在指定的线程中执行,但是该线程必须具备 run loop</strong></li>
+</ul>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp">- <span class="params">(void)</span>performSelector:<span class="params">(<span class="variable">SEL</span>)</span>aSelector onThread:<span class="params">(<span class="variable">NSThread</span> *)</span>thr withObject:<span class="params">(id)</span>arg waitUntilDone:<span class="params">(<span class="variable">BOOL</span>)</span>wait</span></span><br></pre></td></tr></table></figure>
+<h3 id="常见NSThread_的方法">常见NSThread 的方法</h3><hr>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">NSThread</span> *)currentThread; <span class="comment">//获得当前线程</span></span><br><span class="line">+ (<span class="keyword">void</span>)sleepForTimeInterval:(<span class="built_in">NSTimeInterval</span>)ti; <span class="comment">//线程休眠</span></span><br><span class="line">+ (<span class="built_in">NSThread</span> *)mainThread; <span class="comment">//主线程,即 UI线程</span></span><br><span class="line">+ (<span class="built_in">BOOL</span>)isMainThread; <span class="comment">//判断是否主线程</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)isMainThread; <span class="comment">//同上</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)isExecuting; <span class="comment">// 线程是否正在运行</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)isFinished; <span class="comment">// 线程是否已结束</span></span><br></pre></td></tr></table></figure>
+<p>Demo:<br>创建一个 lable, 实现程序运行起来一段时间后就能显示一些内容,并且有一个 button 的按钮,当点击时,模拟从网络上刷新出一张图片,从中我们要了解到当需要更新 UI 时,必须在主线程中进行.从用户的角度来说,我看一张图片,不能影响的我在界面的其他操作,否则,这个 app 用着体验太差,我可能会删掉不再使用.</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="keyword">IBOutlet</span> <span class="built_in">UIImageView</span> *imageView;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="keyword">IBOutlet</span> <span class="built_in">UILabel</span> *lable;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">   </span><br><span class="line">    <span class="comment">// 1.类方法</span></span><br><span class="line">    [<span class="built_in">NSThread</span> detachNewThreadSelector:<span class="keyword">@selector</span>(dosomething:) toTarget:<span class="keyword">self</span> withObject:<span class="string">@"detachNewThreadSelector"</span>];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)dosomething:(<span class="built_in">NSString</span> * )string</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 休眠5秒钟,只是模拟一个耗时的操作,如果操作耗时,就另起一个线程执行</span></span><br><span class="line">    [<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">5</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//更新 UI, 必须在主线程中进行  //NO 异步  YES 同步</span></span><br><span class="line">    [<span class="keyword">self</span> performSelectorOnMainThread:<span class="keyword">@selector</span>(updateLable:) withObject:string waitUntilDone:<span class="literal">NO</span>];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%s"</span>,__func__);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)updateLable:(<span class="built_in">NSString</span>*)string</span><br><span class="line">&#123;</span><br><span class="line">    _lable<span class="variable">.text</span> = string;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#pragma mark - image view</span></span><br><span class="line">- (<span class="keyword">IBAction</span>)btnAction:(<span class="built_in">UIButton</span> *)sender &#123;</span><br><span class="line">    <span class="comment">//实例方法</span></span><br><span class="line">    <span class="built_in">NSString</span> *urlStr =  <span class="string">@"http://img.hb.aicdn.com/5a8f57157b47284724d09ffd2da28369731f8144ac9c-1XdZKJ_fw658"</span>;</span><br><span class="line">    <span class="built_in">NSThread</span> *thread = [[<span class="built_in">NSThread</span> alloc] initWithTarget:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(fetchImage:) object:urlStr];</span><br><span class="line">    thread<span class="variable">.name</span> = <span class="string">@"lisi"</span>;</span><br><span class="line">    [thread start];</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)fetchImage:(<span class="built_in">NSString</span>*)urlStr</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 进行耗时的网络请求</span></span><br><span class="line">    [<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">4</span>];</span><br><span class="line">    <span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:urlStr];</span><br><span class="line">    <span class="built_in">NSData</span> *data = [<span class="built_in">NSData</span> dataWithContentsOfURL:url];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageWithData:data];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> ([[<span class="built_in">NSThread</span> currentThread]<span class="variable">.name</span> isEqualToString:<span class="string">@"lisi"</span>]) &#123;</span><br><span class="line">        <span class="built_in">BOOL</span> isMainThread = [[<span class="built_in">NSThread</span> currentThread] isMainThread];</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"&gt;&gt;&gt;&gt;&gt;isMainThread:%d"</span>,isMainThread);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">BOOL</span> isMainThread = [[<span class="built_in">NSThread</span> currentThread] isMainThread];</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"&lt;&lt;&lt;&lt;&lt;&lt;isMainThread:%d"</span>,isMainThread);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    [<span class="keyword">self</span> performSelectorOnMainThread:<span class="keyword">@selector</span>(updateImageView:) withObject:image waitUntilDone:<span class="literal">YES</span>];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)updateImageView:(<span class="built_in">UIImage</span> *)image</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> ([[<span class="built_in">NSThread</span> currentThread] isMainThread]) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"主线程:%s"</span>,__func__);</span><br><span class="line">    &#125;</span><br><span class="line">    _imageView<span class="variable">.image</span> = image;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>运行结果:<br>2015-08-02 14:49:31.823 03-NSThreadDemo[3151:781147] -[ViewController dosomething:]<br>2015-08-02 14:49:34.539 03-NSThreadDemo[3151:781778] &gt;&gt;&gt;&gt;&gt;isMainThread:0<br>2015-08-02 14:49:34.539 03-NSThreadDemo[3151:780917] 主线程:-[ViewController updateImageView:]</p>
+<p>/Users/qingyun/Desktop/屏幕快照 2015-08-02 14.48.53.png</p>
+<hr>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/10/iOS-多线程技术1/" data-id="cifkjyw97000naxnokx0a1mqb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/10/iOS-多线程技术1/" data-id="cifkv25j5000mq5nol1h98oks" class="article-share-link">Share</a>
       
       
     </footer>
@@ -442,11 +495,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="fscanf_函数的用法">fscanf 函数的用法</h3><p>以前解析有规律的文件的时候要么用正则表达式，要么就是傻傻的自己写程序来解析有规律的文件。今天突然发现c的库函数中有一个现成的可以解析有规律的文件的函数，就是fscanf（）函数。难过哎 以前自己做了这么多无用功，在这里详细解析一下fscanf函数：</p>
+<p>fscanf（）函数（有点像正则表达式）：</p>
+<p>功 能: 从一个流中执行格式化输入,fscanf遇到空格和换行时结束，注意空格时也结束。</p>
+<p>用 法:int fscanf(FILE <em>stream, char </em>format,[argument…]);</p>
+<p>int fscanf(文件指针，格式字符串，输入列表);</p>
+<p>　　for example:</p>
+<p>　　FILE*fp;</p>
+<p>　　chara[10];</p>
+<p>　　intb;</p>
+<p>　　doublec;</p>
+<p>　　fscanf(fp,”%s%d%lf”,a,&amp;b,&amp;c)</p>
+<p>　　返回值：整型，数值等于[argument…]的个数</p>
+<p>其中的format就是相当于正则表达式中的格式，即用什么样的格式来分隔文件中的信息。光说不好理解，一下用一个例子来说明具体怎么用：</p>
+<p>首先我有一个data。txt的文件里面的数据格式如下：</p>
+<p>2,50,41,w,20.585828</p>
+<p>4,52,51,r,52.012547</p>
+<p>…………………….</p>
+<p> 许多条类似的记录，都是以，来分隔的</p>
+<p>…………………..</p>
+<p>我实现的功能就是把上面文件中的数据的五个字段赋值给相应的五个变量，并且输出这些变量的值。实现的程序如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> fd;</span><br><span class="line">  <span class="keyword">long</span> dev;</span><br><span class="line">  <span class="keyword">long</span> offset;</span><br><span class="line">  <span class="keyword">long</span> length;</span><br><span class="line">  <span class="keyword">char</span> ch;</span><br><span class="line">  <span class="keyword">double</span> ts=<span class="number">0.000000</span>;</span><br><span class="line">  <span class="keyword">if</span>((fd=fopen(<span class="string">"/home/haixian/ceshi/data.txt"</span>,<span class="string">"r"</span>))&lt;<span class="number">0</span>)</span><br><span class="line">   &#123;</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">"open the file is error!\n"</span>);</span><br><span class="line">     <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">   &#125;</span><br><span class="line">  lseek(fd,<span class="number">0</span>,SEEK_SET);</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  <span class="keyword">while</span>(<span class="number">5</span>==<span class="built_in">fscanf</span>(fd,<span class="string">"%ld,%ld,%ld,%c,%lf\n"</span>,&amp;dev,&amp;offset,&amp;length,&amp;ch,&amp;ts))</span><br><span class="line">  &#123;在这里就是第二个参数指定分隔参数的格式，在这里使用的是，来分隔。这样就很容易的获取了记录的各个字段的值并不需要自己编写函数来进行解析什么的。</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">"%ld,%ld,%ld,%c,%lf\n"</span>,dev,offset,length,ch,ts);</span><br><span class="line">  &#125;</span><br><span class="line">close(fd);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过上面的例子能很好的理解fscanf函数的用法。以前自己写程序解析这种文件，费力还不讨好，得出的结果还不准确。哎 只能感叹我太弱了，以后还得好好学习！！！！</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/10/fscanf-函数-非本人/" data-id="cifkjyw9d000paxno4bmu7vk8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/10/fscanf-函数-非本人/" data-id="cifkv25jk000oq5no5ycg1f5p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -475,7 +550,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 

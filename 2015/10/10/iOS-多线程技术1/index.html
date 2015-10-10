@@ -5,16 +5,52 @@
   
   <title>iOS_多线程技术1 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
+  <meta name="description" content="iOS 多线程技术1
+iOS 有三种多线程编程技术:
+
+NSThread
+NSOperation
+GCD
+
+它们的抽象程度由低到高,越高的使用起来越简单.
+NSThread显示调用 NSthread 类
+
+类方法
+
+1+ (void)detachNewThreadSelector:(SEL)selector toTarget:(id)target withObject:(id)argument;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS_多线程技术1">
 <meta property="og:url" content="http://yoursite.com/2015/10/10/iOS-多线程技术1/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description">
-<meta property="og:updated_time" content="2015-10-10T03:46:39.000Z">
+<meta property="og:description" content="iOS 多线程技术1
+iOS 有三种多线程编程技术:
+
+NSThread
+NSOperation
+GCD
+
+它们的抽象程度由低到高,越高的使用起来越简单.
+NSThread显示调用 NSthread 类
+
+类方法
+
+1+ (void)detachNewThreadSelector:(SEL)selector toTarget:(id)target withObject:(id)argument;">
+<meta property="og:updated_time" content="2015-10-10T09:07:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS_多线程技术1">
-<meta name="twitter:description">
+<meta name="twitter:description" content="iOS 多线程技术1
+iOS 有三种多线程编程技术:
+
+NSThread
+NSOperation
+GCD
+
+它们的抽象程度由低到高,越高的使用起来越简单.
+NSThread显示调用 NSthread 类
+
+类方法
+
+1+ (void)detachNewThreadSelector:(SEL)selector toTarget:(id)target withObject:(id)argument;">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -82,11 +118,49 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="iOS_多线程技术1">iOS 多线程技术1</h2><hr>
+<p>iOS 有三种多线程编程技术:</p>
+<ul>
+<li>NSThread</li>
+<li>NSOperation</li>
+<li>GCD</li>
+</ul>
+<p>它们的抽象程度由低到高,越高的使用起来越简单.</p>
+<h3 id="NSThread">NSThread</h3><h4 id="显示调用_NSthread_类">显示调用 NSthread 类</h4><hr>
+<ul>
+<li><strong>类方法</strong></li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="typename">void</span>)<span class="string">detachNewThreadSelector:</span>(SEL)selector <span class="string">toTarget:</span>(id)target <span class="string">withObject:</span>(id)argument;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>实例方法</strong></li>
+</ul>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp">- <span class="params">(instancetype)</span>initWithTarget:<span class="params">(id)</span>target selector:<span class="params">(<span class="variable">SEL</span>)</span>selector object:<span class="params">(id)</span>argument</span><br><span class="line"> [thread start]</span></span><br></pre></td></tr></table></figure>
+<h3 id="隐式调用">隐式调用</h3><hr>
+<ul>
+<li><strong>开启后台线程</strong></li>
+</ul>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp">- <span class="params">(void)</span>performSelectorInBackground:<span class="params">(<span class="variable">SEL</span>)</span>aSelector withObject:<span class="params">(id)</span>arg</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>在主线程中运行</strong></li>
+</ul>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp">- <span class="params">(void)</span>performSelectorOnMainThread:<span class="params">(<span class="variable">SEL</span>)</span>aSelector withObject:<span class="params">(id)</span>arg waitUntilDone:<span class="params">(<span class="variable">BOOL</span>)</span>wait</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>在指定的线程中执行,但是该线程必须具备 run loop</strong></li>
+</ul>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp">- <span class="params">(void)</span>performSelector:<span class="params">(<span class="variable">SEL</span>)</span>aSelector onThread:<span class="params">(<span class="variable">NSThread</span> *)</span>thr withObject:<span class="params">(id)</span>arg waitUntilDone:<span class="params">(<span class="variable">BOOL</span>)</span>wait</span></span><br></pre></td></tr></table></figure>
+<h3 id="常见NSThread_的方法">常见NSThread 的方法</h3><hr>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">NSThread</span> *)currentThread; <span class="comment">//获得当前线程</span></span><br><span class="line">+ (<span class="keyword">void</span>)sleepForTimeInterval:(<span class="built_in">NSTimeInterval</span>)ti; <span class="comment">//线程休眠</span></span><br><span class="line">+ (<span class="built_in">NSThread</span> *)mainThread; <span class="comment">//主线程,即 UI线程</span></span><br><span class="line">+ (<span class="built_in">BOOL</span>)isMainThread; <span class="comment">//判断是否主线程</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)isMainThread; <span class="comment">//同上</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)isExecuting; <span class="comment">// 线程是否正在运行</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)isFinished; <span class="comment">// 线程是否已结束</span></span><br></pre></td></tr></table></figure>
+<p>Demo:<br>创建一个 lable, 实现程序运行起来一段时间后就能显示一些内容,并且有一个 button 的按钮,当点击时,模拟从网络上刷新出一张图片,从中我们要了解到当需要更新 UI 时,必须在主线程中进行.从用户的角度来说,我看一张图片,不能影响的我在界面的其他操作,否则,这个 app 用着体验太差,我可能会删掉不再使用.</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="keyword">IBOutlet</span> <span class="built_in">UIImageView</span> *imageView;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="keyword">IBOutlet</span> <span class="built_in">UILabel</span> *lable;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">   </span><br><span class="line">    <span class="comment">// 1.类方法</span></span><br><span class="line">    [<span class="built_in">NSThread</span> detachNewThreadSelector:<span class="keyword">@selector</span>(dosomething:) toTarget:<span class="keyword">self</span> withObject:<span class="string">@"detachNewThreadSelector"</span>];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)dosomething:(<span class="built_in">NSString</span> * )string</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 休眠5秒钟,只是模拟一个耗时的操作,如果操作耗时,就另起一个线程执行</span></span><br><span class="line">    [<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">5</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//更新 UI, 必须在主线程中进行  //NO 异步  YES 同步</span></span><br><span class="line">    [<span class="keyword">self</span> performSelectorOnMainThread:<span class="keyword">@selector</span>(updateLable:) withObject:string waitUntilDone:<span class="literal">NO</span>];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%s"</span>,__func__);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)updateLable:(<span class="built_in">NSString</span>*)string</span><br><span class="line">&#123;</span><br><span class="line">    _lable<span class="variable">.text</span> = string;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#pragma mark - image view</span></span><br><span class="line">- (<span class="keyword">IBAction</span>)btnAction:(<span class="built_in">UIButton</span> *)sender &#123;</span><br><span class="line">    <span class="comment">//实例方法</span></span><br><span class="line">    <span class="built_in">NSString</span> *urlStr =  <span class="string">@"http://img.hb.aicdn.com/5a8f57157b47284724d09ffd2da28369731f8144ac9c-1XdZKJ_fw658"</span>;</span><br><span class="line">    <span class="built_in">NSThread</span> *thread = [[<span class="built_in">NSThread</span> alloc] initWithTarget:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(fetchImage:) object:urlStr];</span><br><span class="line">    thread<span class="variable">.name</span> = <span class="string">@"lisi"</span>;</span><br><span class="line">    [thread start];</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)fetchImage:(<span class="built_in">NSString</span>*)urlStr</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 进行耗时的网络请求</span></span><br><span class="line">    [<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">4</span>];</span><br><span class="line">    <span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:urlStr];</span><br><span class="line">    <span class="built_in">NSData</span> *data = [<span class="built_in">NSData</span> dataWithContentsOfURL:url];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageWithData:data];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> ([[<span class="built_in">NSThread</span> currentThread]<span class="variable">.name</span> isEqualToString:<span class="string">@"lisi"</span>]) &#123;</span><br><span class="line">        <span class="built_in">BOOL</span> isMainThread = [[<span class="built_in">NSThread</span> currentThread] isMainThread];</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"&gt;&gt;&gt;&gt;&gt;isMainThread:%d"</span>,isMainThread);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">BOOL</span> isMainThread = [[<span class="built_in">NSThread</span> currentThread] isMainThread];</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"&lt;&lt;&lt;&lt;&lt;&lt;isMainThread:%d"</span>,isMainThread);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    [<span class="keyword">self</span> performSelectorOnMainThread:<span class="keyword">@selector</span>(updateImageView:) withObject:image waitUntilDone:<span class="literal">YES</span>];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)updateImageView:(<span class="built_in">UIImage</span> *)image</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> ([[<span class="built_in">NSThread</span> currentThread] isMainThread]) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"主线程:%s"</span>,__func__);</span><br><span class="line">    &#125;</span><br><span class="line">    _imageView<span class="variable">.image</span> = image;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>运行结果:<br>2015-08-02 14:49:31.823 03-NSThreadDemo[3151:781147] -[ViewController dosomething:]<br>2015-08-02 14:49:34.539 03-NSThreadDemo[3151:781778] &gt;&gt;&gt;&gt;&gt;isMainThread:0<br>2015-08-02 14:49:34.539 03-NSThreadDemo[3151:780917] 主线程:-[ViewController updateImageView:]</p>
+<p>/Users/qingyun/Desktop/屏幕快照 2015-08-02 14.48.53.png</p>
+<hr>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/10/iOS-多线程技术1/" data-id="cifkjyw97000naxnokx0a1mqb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/10/iOS-多线程技术1/" data-id="cifkv25j5000mq5nol1h98oks" class="article-share-link">Share</a>
       
       
     </footer>
@@ -129,7 +203,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 

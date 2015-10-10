@@ -5,16 +5,25 @@
   
   <title>fprintf函数用法(非原创) | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
+  <meta name="description" content="1、fprintf函数fprintf函数的功能是和printf函数类似，传送格式化输出到一个流中；只不过fprintf函数的读写对象不是 终端 而是 磁盘文件。
+函数原型：fprintf（FILE  stream, const char  format, 输出表列）；
+int fprintf(FILE stream, char format[, argument,…]);
+fprintf接受一串参">
 <meta property="og:type" content="article">
 <meta property="og:title" content="fprintf函数用法(非原创)">
 <meta property="og:url" content="http://yoursite.com/2015/10/10/fprintf函数用法-非原创/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description">
-<meta property="og:updated_time" content="2015-10-10T03:46:03.000Z">
+<meta property="og:description" content="1、fprintf函数fprintf函数的功能是和printf函数类似，传送格式化输出到一个流中；只不过fprintf函数的读写对象不是 终端 而是 磁盘文件。
+函数原型：fprintf（FILE  stream, const char  format, 输出表列）；
+int fprintf(FILE stream, char format[, argument,…]);
+fprintf接受一串参">
+<meta property="og:updated_time" content="2015-10-10T09:06:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="fprintf函数用法(非原创)">
-<meta name="twitter:description">
+<meta name="twitter:description" content="1、fprintf函数fprintf函数的功能是和printf函数类似，传送格式化输出到一个流中；只不过fprintf函数的读写对象不是 终端 而是 磁盘文件。
+函数原型：fprintf（FILE  stream, const char  format, 输出表列）；
+int fprintf(FILE stream, char format[, argument,…]);
+fprintf接受一串参">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -82,11 +91,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>1、fprintf函数<br>fprintf函数的功能是和printf函数类似，传送格式化输出到一个流中；只不过fprintf函数的读写对象不是 终端 而是 磁盘文件。</p>
+<p>函数原型：<br>fprintf（FILE <em> stream, const char </em> format, 输出表列）；</p>
+<p>int fprintf(FILE <em>stream, char </em>format[, argument,…]);</p>
+<p>fprintf接受一串参数，用format指定的格式串中包含的格式说明符，分别作用在这些参数上，并将格式化数据输出到一个流上。</p>
+<p>注意格式 说明符的格数 必须与 参数的格数 相同。（有多少%，后面就有多少参数）如果调用成功，将返回转换的字节数，失败时返回一个负数；</p>
+<p>2、fscanf()函数<br>函数原型：int fscanf( FILE <em>stream,const char </em>format [,argument ]… );<br>作用：Read formatted data from a stream.（从流中 读取 格式化的数据）</p>
+<p>例子：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">pragma</span> <span class="keyword">warning</span>(disable:<span class="number">4786</span>)</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">"iostream.h"</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> FALSE <span class="number">0</span></span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">map</span>&lt; <span class="built_in">std</span>::<span class="built_in">string</span>, <span class="keyword">int</span> &gt; g_mapNames;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line"> FILE *p = <span class="literal">NULL</span>;</span><br><span class="line">        p = fopen(<span class="string">".//log.txt"</span>,<span class="string">"a+"</span>); <span class="comment">//以a+方式打开一个文件，注意函数fopen的使用；</span></span><br><span class="line"> <span class="keyword">if</span> (p == <span class="literal">NULL</span>)</span><br><span class="line">  <span class="keyword">return</span> FALSE;</span><br><span class="line"> <span class="keyword">char</span> a[<span class="number">6</span>] = <span class="string">"12345"</span>;</span><br><span class="line"><span class="comment">// int b = fprintf(p,"%s/n",a);//fprintf函数如果调用成功，返回转换的字符数；这里是6，相当于sizeof(a)</span></span><br><span class="line"> <span class="keyword">char</span> a1[<span class="number">32</span>] = <span class="string">""</span>;</span><br><span class="line"> <span class="keyword">char</span> a2[<span class="number">32</span>] = <span class="string">""</span>;</span><br><span class="line"> <span class="keyword">int</span> m = <span class="number">2</span>;</span><br><span class="line"> <span class="built_in">std</span>::<span class="built_in">map</span>&lt; <span class="built_in">std</span>::<span class="built_in">string</span>, <span class="keyword">int</span> &gt; ::iterator iter;<span class="comment">//注意map声明迭代器的时候 要有iterator</span></span><br><span class="line"> <span class="keyword">while</span>( m == <span class="number">2</span>)</span><br><span class="line"> &#123;</span><br><span class="line">  m = <span class="built_in">fscanf</span>(p, <span class="string">"%s/t%s/n"</span>, a1,a2); </span><br><span class="line">  <span class="comment">//往a1,a2里面拷贝字符串,返回的m是拷贝的个数，返回-1是拷贝失败；/t和/n是拷贝的终止符；</span></span><br><span class="line">                                                     <span class="comment">//也就是第一个字符串拷贝的时候以/t结束，第二个以/n结束，分别拷贝到a1 和 a2 中；</span></span><br><span class="line">  <span class="keyword">if</span> (m == <span class="number">2</span>)</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="keyword">int</span> a22 = atoi(a2);          <span class="comment">//atoi是把字符串转换成int类型，这里是把a2从字符串转换成int</span></span><br><span class="line">   <span class="comment">//printf("%s/n",a1);</span></span><br><span class="line">   iter = g_mapNames.find(a1);  <span class="comment">//字典的find方法，是查找字典中有没有key，有的话返回智能指针，没有的话指向end();</span></span><br><span class="line">   <span class="keyword">if</span>(iter != g_mapNames.end())</span><br><span class="line">    g_mapNames[a1] += a22;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">    g_mapNames[a1] = a22;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">char</span> mm[<span class="number">128</span>] = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line"> &#123;</span><br><span class="line">  <span class="built_in">cin</span>&gt;&gt;mm;</span><br><span class="line">  iter = g_mapNames.find(mm);</span><br><span class="line">  <span class="keyword">if</span>( iter != g_mapNames.end())</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"%s--%d/n"</span>,mm,g_mapNames[mm]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"Cannot find your need!/n"</span>);</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">//printf("%d/n",g_mapNames.size());</span></span><br><span class="line"> fclose(p);</span><br><span class="line"> p = <span class="literal">NULL</span>;</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/10/fprintf函数用法-非原创/" data-id="cifkjyw9f000qaxnox5h7l0q6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/10/fprintf函数用法-非原创/" data-id="cifkv25jn000pq5nohu1nxbvh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -129,7 +145,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 

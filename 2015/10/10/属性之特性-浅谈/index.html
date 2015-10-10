@@ -5,16 +5,25 @@
   
   <title>属性之特性 浅谈 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
+  <meta name="description" content="特性( Property)
+使用特性我们可以避免手工编写繁琐的 setter 和 getter 方法,避免因为这些方法来内存的问题,同       时,也可以节省编写代码的时间
+@property 新的编译器指令,主要功能是为我们自动”生成”,setter 和 getter 方法的声明.(这里需要注意:我们是看不到这些代码的,它们是有编译器自动生成的)
+@synthesize 与@ propert">
 <meta property="og:type" content="article">
 <meta property="og:title" content="属性之特性 浅谈">
 <meta property="og:url" content="http://yoursite.com/2015/10/10/属性之特性-浅谈/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description">
-<meta property="og:updated_time" content="2015-10-10T03:43:05.000Z">
+<meta property="og:description" content="特性( Property)
+使用特性我们可以避免手工编写繁琐的 setter 和 getter 方法,避免因为这些方法来内存的问题,同       时,也可以节省编写代码的时间
+@property 新的编译器指令,主要功能是为我们自动”生成”,setter 和 getter 方法的声明.(这里需要注意:我们是看不到这些代码的,它们是有编译器自动生成的)
+@synthesize 与@ propert">
+<meta property="og:updated_time" content="2015-10-10T09:04:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="属性之特性 浅谈">
-<meta name="twitter:description">
+<meta name="twitter:description" content="特性( Property)
+使用特性我们可以避免手工编写繁琐的 setter 和 getter 方法,避免因为这些方法来内存的问题,同       时,也可以节省编写代码的时间
+@property 新的编译器指令,主要功能是为我们自动”生成”,setter 和 getter 方法的声明.(这里需要注意:我们是看不到这些代码的,它们是有编译器自动生成的)
+@synthesize 与@ propert">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -82,11 +91,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="特性(_Property)">特性( Property)</h1><ul>
+<li>使用特性我们可以避免手工编写繁琐的 setter 和 getter 方法,避免因为这些方法来内存的问题,同       时,也可以节省编写代码的时间</li>
+<li><strong>@property</strong> 新的编译器指令,主要功能是为我们自动”生成”,setter 和 getter 方法的声明.(这里需要注意:我们是看不到这些代码的,它们是有编译器自动生成的)</li>
+<li><strong>@synthesize</strong> 与@ property 相对应的新的编译器功能.主要是为我们自动生成 setter 和 getter 方法的功能实现.(这里也要注意:我们也看不到相应代码)</li>
+</ul>
+<p>在这里举一个例子,新建一个 QYTire 类,继承于 NSOhject</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@interface</span> <span class="string">QYTire :</span> NSObject</span><br><span class="line">&#123;</span><br><span class="line">   <span class="typename">float</span> pressure;<span class="comment">//胎压</span></span><br><span class="line">   <span class="typename">float</span> treadth;<span class="comment">//轮胎花纹情况</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="typename">void</span>)<span class="string">setPressure:</span>(<span class="typename">float</span>)pressure;</span><br><span class="line">- (<span class="typename">float</span>)pressure;</span><br><span class="line"></span><br><span class="line">- (<span class="typename">void</span>)<span class="string">setTreadth:</span>(<span class="typename">float</span>)treadth;</span><br><span class="line">- (<span class="typename">float</span>)treadth;</span><br><span class="line"></span><br><span class="line"><span class="annotation">@end</span></span><br></pre></td></tr></table></figure>
+<p>使用@ property 后就变成如下结果</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@interface</span> <span class="string">QYTire :</span> NSObject</span><br><span class="line">&#123;</span><br><span class="line">   <span class="typename">float</span> pressure;<span class="comment">//胎压</span></span><br><span class="line">   <span class="typename">float</span> treadth;<span class="comment">//轮胎花纹情况</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="annotation">@property</span> <span class="typename">float</span> pressure;</span><br><span class="line"><span class="annotation">@property</span> <span class="typename">float</span> treadth;</span><br><span class="line"></span><br><span class="line"><span class="annotation">@end</span></span><br></pre></td></tr></table></figure>
+<p>而@ synthesize 的用法也是如此,未使用之前,在对应的. m 文件中代码是这样:  </p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@implementation</span> QYTire</span><br><span class="line"></span><br><span class="line">- (<span class="typename">void</span>)<span class="string">setPressure:</span>(<span class="typename">float</span>)p</span><br><span class="line">&#123;</span><br><span class="line">    pressure = p;</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="typename">float</span>)pressure</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> pressure;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="typename">void</span>)<span class="string">setTreadth:</span>(<span class="typename">float</span>)t</span><br><span class="line">&#123;</span><br><span class="line">    treadth = t;</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="typename">float</span>)treadth</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> treadth;</span><br><span class="line">&#125;</span><br><span class="line"><span class="annotation">@end</span></span><br></pre></td></tr></table></figure>
+<p>使用了@ synthesize 后可以是这样:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@implementation</span> QYTire</span><br><span class="line"></span><br><span class="line"><span class="variable">@synthesize</span> pressure;</span><br><span class="line"><span class="variable">@synthesize</span> treated;</span><br><span class="line"><span class="variable">@end</span></span><br></pre></td></tr></table></figure>
+<p>而@ property 和@ synthesize 结合使用的结果就是 QYTire.h 文件</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@interface</span> <span class="attribute">QYTire </span>: NSObject</span><br><span class="line"></span><br><span class="line"><span class="variable">@property</span> float pressure;</span><br><span class="line"><span class="variable">@property</span> float treadth;</span><br><span class="line"></span><br><span class="line"><span class="variable">@end</span></span><br></pre></td></tr></table></figure>
+<p>QYTire.m 文件内容如下</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@implementation</span> QYTire</span><br><span class="line"></span><br><span class="line"><span class="variable">@end</span></span><br></pre></td></tr></table></figure>
+<p>这是编译器的新机制,直接省略了@ synthesize, 由编译器自动生成 setter 和 getter 方法.</p>
+<h2 id="局限性">局限性</h2><ul>
+<li>特性不能用于有参数的 setter 和 getter 方法,如:</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">-</span> (<span class="tag">void</span>) <span class="rule"><span class="attribute">setTire</span>:<span class="value">(Tire*) tire atIndex:(int)index</span></span>;</span><br><span class="line"><span class="tag">-</span> (<span class="tag">Tire</span>*) <span class="rule"><span class="attribute">tireAtIndex</span>:<span class="value">(int)index</span></span>;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/10/属性之特性-浅谈/" data-id="cifkjyw8k000baxnomg2exhnj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/10/属性之特性-浅谈/" data-id="cifkv25ig000aq5no12oazbn6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -129,7 +159,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 

@@ -5,16 +5,22 @@
   
   <title>内存管理之_arc | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
+  <meta name="description" content="内存管理之 ARC 和 自动释放池一、ARC 中的变量所有权修饰符变量修饰符,主要用来标识对象的生命周期.在手动内存管理方式中没有这些概念.ARC 环境下变量所有权修饰符主要有以下几个: 
+1234__strong   __weak__unsa_unretained__autoreleasing
+详细说明:(1) 变量默认值都是__ strong 修饰只要强引用存在,对象就不能释放.当超过了对象的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="内存管理之_arc">
 <meta property="og:url" content="http://yoursite.com/2015/10/10/内存管理之-arc/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description">
-<meta property="og:updated_time" content="2015-10-10T03:42:16.000Z">
+<meta property="og:description" content="内存管理之 ARC 和 自动释放池一、ARC 中的变量所有权修饰符变量修饰符,主要用来标识对象的生命周期.在手动内存管理方式中没有这些概念.ARC 环境下变量所有权修饰符主要有以下几个: 
+1234__strong   __weak__unsa_unretained__autoreleasing
+详细说明:(1) 变量默认值都是__ strong 修饰只要强引用存在,对象就不能释放.当超过了对象的">
+<meta property="og:updated_time" content="2015-10-10T09:03:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内存管理之_arc">
-<meta name="twitter:description">
+<meta name="twitter:description" content="内存管理之 ARC 和 自动释放池一、ARC 中的变量所有权修饰符变量修饰符,主要用来标识对象的生命周期.在手动内存管理方式中没有这些概念.ARC 环境下变量所有权修饰符主要有以下几个: 
+1234__strong   __weak__unsa_unretained__autoreleasing
+详细说明:(1) 变量默认值都是__ strong 修饰只要强引用存在,对象就不能释放.当超过了对象的">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -82,11 +88,42 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="内存管理之_ARC_和_自动释放池">内存管理之 ARC 和 自动释放池</h2><h4 id="一、ARC_中的变量所有权修饰符">一、ARC 中的变量所有权修饰符</h4><p>变量修饰符,主要用来标识对象的生命周期.在手动内存管理方式中没有这些概念.<br>ARC 环境下变量所有权修饰符主要有以下几个: </p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">__<span class="keyword">strong</span>   </span><br><span class="line">__<span class="keyword">weak</span></span><br><span class="line">__unsa_unretained</span><br><span class="line">__autoreleasing</span><br></pre></td></tr></table></figure>
+<p>详细说明:<br>(1) 变量默认值都是<strong>__ strong</strong> 修饰<br>只要强引用存在,对象就不能释放.当超过了对象的作用域以及没有强引用时,对象会自动销毁.<br><strong>__strong</strong> 属性基本上能适应 ARC 环境下的所有情况.如果不写的话,默认为<strong>__ strong</strong> 属性.<br>(2) <strong>__weak</strong> 不持有对象,只是简单地引用而已.<br>也就是说,<strong>__weak</strong>不会影响对象的销毁，只要<strong>__weak</strong> 修饰的对象没有强引用时,就会自动销毁,这时候<strong>__ weak</strong> 变量会自动设置成 nil.<br>下面是一个例子</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *__<span class="keyword">weak</span> str = [][<span class="built_in">NSString</span> alloc] initWithFormat:<span class="string">@"I am studying"</span>];</span><br><span class="line"><span class="built_in">NSLog</span> (<span class="string">@"str : %@"</span>,str);</span><br></pre></td></tr></table></figure>
+<p>因为 str 这个对象是弱引用,编译器会提示,这是一个弱引用,输出的结果: str:null</p>
+<p>在你打开ARC时，你是不能使用retainrelease autorelease 操作的，原先需要手动添加的用来处理内存管理的引用计数的代码可以自动地由编译器完成了，但是你需要在对象属性上使用weak 和strong, 其中strong就相当于retain属性，而weak相当于assign，基础类型还是使用assign。</p>
+<h4 id="二、自动释放池">二、自动释放池</h4><ul>
+<li>自动释放池是一个存放实体的集合,这些实体可能是对象,这些对象能够被自动释放.</li>
+<li>(id)autorelease;// 是 NSObject提供的方法,此方法在某一个预定的时候,想对象发送 release 消息,返回值是接收消息的对象.实际上当给一个对象发送 autorelease 消息的时候,就是将这个对象添加到自动释放池( NSAutoreleasePool) 中,当自动释放池被销毁时,会向该池中的所有对象发送 release 消息</li>
+</ul>
+<h6 id="临时对象和拥有对象">临时对象和拥有对象</h6><p>当使用如：arrayWithCapacity这样的方法获取临时对象的时候，你不必考虑内存释放问题。<br>[NSColor blueColor]; 单例对象，永远不会被销毁，但是你也不必考虑它的内存问题。<br>如果在你自定义的类中依赖其它对象时，你需要重写dealloc方法，并且在这个方法中释放依赖的对象<br>如果在设计的循环体中会占用较多的内存空间，建议手动创建自动释放池。如：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSAutoreleasePool</span> *pool = [[<span class="built_in">NSAutoreleasePool</span> alloc] init];   </span><br><span class="line"><span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000000</span>; i++) &#123;   		</span><br><span class="line"><span class="keyword">id</span> object = [someArray objectAtIndex:i];		</span><br><span class="line"><span class="built_in">NSString</span> *desc = [object description];		</span><br><span class="line"><span class="comment">// and do something with te descripton</span></span><br><span class="line"> 		<span class="keyword">if</span> ( i % <span class="number">100</span> == <span class="number">0</span>) &#123;</span><br><span class="line"> 			[pool release];      		     </span><br><span class="line"> 			pool = [[<span class="built_in">NSAutoreleasePool</span> alloc] init];</span><br><span class="line"> 		&#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h6 id="APC_的本质">APC 的本质</h6><ul>
+<li>ARC 本质上是由编译器在编译阶段,在合适的地方插入 retain 和 release 方法.</li>
+<li>ARC 是编译时的特性.</li>
+</ul>
+<h6 id="关于_ROP_和_non-ROP">关于 ROP 和 non-ROP</h6><p>所有权归属问题</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">NSString</span> *theString = <span class="string">@"Hello,Henan"</span>;   </span><br><span class="line"><span class="built_in">CFStringRef</span> cfString = (<span class="built_in">CFStringRef</span>)theString</span><br><span class="line"></span><br><span class="line"><span class="comment">// __bridge  </span></span><br><span class="line"></span><br><span class="line">   cfString = (__bridge <span class="built_in">CFStringRef</span>)theString <span class="comment">//指针的所有权不变,所以是 theString</span></span><br><span class="line"><span class="comment">// __bridge_retained</span></span><br><span class="line">   cfString = (__bridge_retained <span class="built_in">CFStringRef</span>)theString<span class="comment">// 指针的所有权对象是 cfString</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//  __bridge_transfer</span></span><br><span class="line"></span><br><span class="line">  cfString = (__bridge_transfer <span class="built_in">CFStringRef</span>)theString<span class="comment">// 指针的所有权属于 theString</span></span><br></pre></td></tr></table></figure>
+<h5 id="使用_ARC_的一些强制规定">使用 ARC 的一些强制规定</h5><ol>
+<li>不能直接调用 dealloc 方法,不能调用 retain,release,autorelease,retainCount 方法,包括@ selector(retain) 的方法也不行.</li>
+<li>如果你需要管理资源而不是释放实例变量,你应该事先 dealloc 方法.不能再 dealloc 方法里面去调[ super dealloc] 方法,在 ARC下父类的 dealloc 同样由编译器来自动完成.</li>
+<li>Core Foundation 类型的对象仍然可以用 CFRetain,CFRealese 这些方法.</li>
+<li>不能在使用 NSAllocateObject和 NSDeallocateObject 对象.</li>
+<li>不能在 C 结构中使用对象指针,如果有类似功能,可以创建一个 Objective-C 类来管理这些对象</li>
+<li>在 id和 void * 之间没有简便的转换方法,同样在Objective-C 和 Core Foundation 类型之间的转换都需要使用编译器指定的转换函数.</li>
+<li>不能再使用 NSAutoreleasePool 对象, ARC 提供了@ autoreleasepool 块来替代它,这样更加有效率.</li>
+<li>不能使用内存储存区(不能再使用 NSZone)</li>
+<li>不能以 new 为开头给一个属性命名.</li>
+<li>声明 outlet 时一般使用 weak, 除了对 StoryBoard 这样的 nib 中间的顶层对象要用 strong.</li>
+<li>weak 相当于老版本的 assign,strong 相当于 retain.</li>
+</ol>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/10/内存管理之-arc/" data-id="cifkjyw8t000faxnokxfqt3oi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/10/内存管理之-arc/" data-id="cifkv25in000eq5nou0qbbduv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -129,7 +166,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 

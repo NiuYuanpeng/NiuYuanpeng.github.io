@@ -5,16 +5,19 @@
   
   <title>fgetc和fputc | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
+  <meta name="description" content="C语言中文件的读写函数之 fputc、fgetc首先，我们要知道fputs和fgetc这两个函数是包含在标准库函数中的函数，换句话说，就是封装在标准函数中的两个函数。其中这两个函数都是每次只能输入或者输出一个字符,换而言之,就是不能一下子把所有数据完全输入或者输出.
+fgetc函数123fgetc函数的作用就是实现将一个字符读出，其函数的用法形式：fgetc（ch，fp）其中fp是文件指针，指向要">
 <meta property="og:type" content="article">
 <meta property="og:title" content="fgetc和fputc">
 <meta property="og:url" content="http://yoursite.com/2015/10/10/fgetc和fputc/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description">
-<meta property="og:updated_time" content="2015-10-10T03:45:46.000Z">
+<meta property="og:description" content="C语言中文件的读写函数之 fputc、fgetc首先，我们要知道fputs和fgetc这两个函数是包含在标准库函数中的函数，换句话说，就是封装在标准函数中的两个函数。其中这两个函数都是每次只能输入或者输出一个字符,换而言之,就是不能一下子把所有数据完全输入或者输出.
+fgetc函数123fgetc函数的作用就是实现将一个字符读出，其函数的用法形式：fgetc（ch，fp）其中fp是文件指针，指向要">
+<meta property="og:updated_time" content="2015-10-10T09:05:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="fgetc和fputc">
-<meta name="twitter:description">
+<meta name="twitter:description" content="C语言中文件的读写函数之 fputc、fgetc首先，我们要知道fputs和fgetc这两个函数是包含在标准库函数中的函数，换句话说，就是封装在标准函数中的两个函数。其中这两个函数都是每次只能输入或者输出一个字符,换而言之,就是不能一下子把所有数据完全输入或者输出.
+fgetc函数123fgetc函数的作用就是实现将一个字符读出，其函数的用法形式：fgetc（ch，fp）其中fp是文件指针，指向要">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -82,11 +85,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="C语言中文件的读写函数之_fputc、fgetc">C语言中文件的读写函数之 fputc、fgetc</h1><p>首先，我们要知道fputs和fgetc这两个函数是包含在标准库函数中的函数，换句话说，就是封装在标准函数中的两个函数。其中这两个函数都是每次只能输入或者输出一个字符,换而言之,就是不能一下子把所有数据完全输入或者输出.</p>
+<h3 id="fgetc函数">fgetc函数</h3><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">fgetc</span>函数的作用就是实现将一个字符读出，其函数的用法形式：</span><br><span class="line"><span class="label">fgetc</span>（ch，<span class="literal">fp</span>）</span><br><span class="line">其中<span class="literal">fp</span>是文件指针，指向要读出的文件，ch是预先定义好的字符型常量，用以接收从<span class="literal">fp</span>所指文件独处的字符</span><br></pre></td></tr></table></figure>
+<h3 id="fputc函数">fputc函数</h3><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fputc函数的作用就是实现将一个字符写入文件中，其函数的用法形式：</span><br><span class="line">fputc（<span class="number">ch</span>，wfp）</span><br><span class="line">其中fp是文件指针,指向要写入的文件，<span class="number">ch</span>是预先定义好的字符型常量</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这两个函数用fclose打开后，一定要判断是否成功打开</p>
+<p>另外，传递字符的过程中，要用EOF来判断文件内容是否传递完全，EOF并不是函数中的内容，它只是表示文件读完了，没东西了，就用EOF代替</p>
+</blockquote>
+<p>接下来就直接来一个实例，我自己编的小程序，功能是实现把一个文件的内容拷贝到另一个文件</p>
+<h4 id="fgetc函数和fputc函数实例">fgetc函数和fputc函数实例</h4><p>［C语言］</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">＃include&lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">＃include&lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">const</span> <span class="keyword">char</span> *argv[])</span></span><br><span class="line"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义两个文件指针</span></span><br><span class="line"></span><br><span class="line">    FILE *fp = <span class="literal">NULL</span>;</span><br><span class="line">    FILE *wfp = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义一个 char 变量,用来打开和接收文件内容</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span> ch;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//打开文件</span></span><br><span class="line"></span><br><span class="line">    fp = fopen(<span class="string">"/Users/qingyun/Desktop/main.txt"</span>,<span class="string">"r"</span>);</span><br><span class="line">    wfp = fopen(<span class="string">"homeWork.txt"</span>,<span class="string">"w"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//检查文件是否打开成功</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">NULL</span> == fp)</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Open the main.txt is error!\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">NULL</span> == wfp)</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Open the homeWork.txt is error!\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//读取文件并将读取的字符保存到下一个文件</span></span><br><span class="line">    </span><br><span class="line">    ch = fgetc(fp);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>( ch != EOF )</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">    	fputc(ch,wfp);</span><br><span class="line">    	ch = fgetc(fp)</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"the file main.txt has copied to homeWork.txt\n"</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//关闭文件</span></span><br><span class="line">	fclose（fp）；</span><br><span class="line">	fclose（wfp）；</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>；</span><br><span class="line">｝</span><br></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/10/fgetc和fputc/" data-id="cifkjyw9i000raxnou9up2re1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/10/fgetc和fputc/" data-id="cifkv25jp000qq5nospn3ahd8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -129,7 +142,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 

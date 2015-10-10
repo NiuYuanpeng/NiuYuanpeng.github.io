@@ -5,16 +5,25 @@
   
   <title>属性 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
+  <meta name="description" content="属性点表达式
+使用了@ property 和@ synthesize 后,我们在 setter 和 getter 方法调用的地方可以使用(.)操作来代替函数调用.
+点表达式只是调用访问器( setter 和 getter) 的一种快捷方式,并没用其他的功能.   
+点的使用语我们 C语言中访问 struct 成员相似, 在 Objective-C 里,如果点出现在 = 左边,表示调用 setter">
 <meta property="og:type" content="article">
 <meta property="og:title" content="属性">
 <meta property="og:url" content="http://yoursite.com/2015/10/10/属性/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description">
-<meta property="og:updated_time" content="2015-10-10T03:42:50.000Z">
+<meta property="og:description" content="属性点表达式
+使用了@ property 和@ synthesize 后,我们在 setter 和 getter 方法调用的地方可以使用(.)操作来代替函数调用.
+点表达式只是调用访问器( setter 和 getter) 的一种快捷方式,并没用其他的功能.   
+点的使用语我们 C语言中访问 struct 成员相似, 在 Objective-C 里,如果点出现在 = 左边,表示调用 setter">
+<meta property="og:updated_time" content="2015-10-10T09:04:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="属性">
-<meta name="twitter:description">
+<meta name="twitter:description" content="属性点表达式
+使用了@ property 和@ synthesize 后,我们在 setter 和 getter 方法调用的地方可以使用(.)操作来代替函数调用.
+点表达式只是调用访问器( setter 和 getter) 的一种快捷方式,并没用其他的功能.   
+点的使用语我们 C语言中访问 struct 成员相似, 在 Objective-C 里,如果点出现在 = 左边,表示调用 setter">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -82,11 +91,36 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="属性">属性</h1><h3 id="点表达式">点表达式</h3><ul>
+<li>使用了@ property 和@ synthesize 后,我们在 setter 和 getter 方法调用的地方可以使用(.)操作来代替函数调用.</li>
+<li>点表达式只是调用访问器( setter 和 getter) 的一种快捷方式,并没用其他的功能.   </li>
+<li>点的使用语我们 C语言中访问 struct 成员相似, 在 Objective-C 里,如果点出现在 = 左边,表示调用 setter 方法;如果点出现在 = 右边,表示调用getter 方法.</li>
+</ul>
+<p>建立 类QYTire继承与父类 NSObject,在 QYTire.h 文件中建立方法</p>
+<p> 注意: //后是注释,帮助理解</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@interface</span> <span class="string">QYTire :</span> NSObject</span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line"><span class="comment">//    float pressure;//胎压</span></span><br><span class="line"><span class="comment">//    float treadth;//轮胎花纹情况</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="annotation">@property</span> <span class="typename">float</span> pressure;<span class="comment">//胎压</span></span><br><span class="line"><span class="annotation">@property</span> <span class="typename">float</span> treadth;<span class="comment">//轮胎花纹情况</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (id)<span class="string">initWithPressure:</span>(<span class="typename">float</span>)pressure;</span><br><span class="line">- (id)<span class="string">initWithTreadth:</span>(<span class="typename">float</span>)treadth;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (id)<span class="string">initWithPressure:</span>(<span class="typename">float</span>)pressure <span class="string">andTreadth:</span>(<span class="typename">float</span>)treadth;</span><br></pre></td></tr></table></figure>
+<p>在 QYTire. m 文件中,使用了指定初始化方式,在这里不用关心,只需要关注其成员变量调用时,前面使用了 self. , 例如 self.pressure,  其相当于[self pressure],使用 self 代表本身向自己发送了调用 pressure 的方法,其方法有编译器自动实现,代码我们是看不到的.</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">QYTire</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">id</span>)init</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">self</span> initWithPressure:<span class="number">30.5</span>f andTreadth:<span class="number">20.6</span>f];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">id</span>)initWithPressure:(<span class="keyword">float</span>)p</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">self</span> initWithPressure:p andTreadth:<span class="number">20.6</span>f];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">id</span>)initWithTreadth:(<span class="keyword">float</span>)t</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">self</span> initWithPressure:<span class="number">30.5</span>f andTreadth:t];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//指定初始化方法</span></span><br><span class="line">- (<span class="keyword">id</span>)initWithPressure:(<span class="keyword">float</span>)p andTreadth:(<span class="keyword">float</span>)t</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> init];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.pressure</span> = p;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.treadth</span> = t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="特性扩展">特性扩展</h3><p>1.在特性声明的时候,可以添加以下关键字,告诉编译器如何实现 setter 和 getter 方法.   </p>
+<ul>
+<li>assign //简单赋值，主要用于基本数据类型</li>
+<li>copy //创建一个新的对象，新的对象和旧对象是独立的两个对象</li>
+<li>retain //将对象计数器加1</li>
+<li>readonly //表示只读属性  只会生成getter方法 不会生成setter方法</li>
+<li>readwrite //默认值，表示生成setter和getter方法</li>
+<li>nonatomic //非原子访问，不加同步 ，多线程并发访问提高性能 （对多线程的保护，防止在未写完，被另一个线程读取，造成数据错误）</li>
+</ul>
+<h3 id="名称的使用">名称的使用</h3><ul>
+<li>主要适用于当实例变量与属性名称需求不同时   </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="at_rule">@<span class="keyword">synthesize</span> name = appellation</span>;</span><br></pre></td></tr></table></figure>
+<p>此时,编译器仍根据属性的特点,合成 setName 和 name 方法,但在是实现的时候,用的是 appellation 实例变量.如下所示:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">-</span> (<span class="tag">void</span>)<span class="rule"><span class="attribute">setName</span>:<span class="value">(NSString*)name</span><br><span class="line">&#123;</span><br><span class="line">	appellation = name</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/10/属性/" data-id="cifkjyw8m000caxno600tcik1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/10/属性/" data-id="cifkv25ih000bq5no2cob1hnu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -105,9 +139,9 @@
     </a>
   
   
-    <a href="/2015/10/10/手势识别器概述-1/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/10/10/深拷贝与浅拷贝/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">手势识别器概述</div>
+      <div class="article-nav-title">深拷贝与浅拷贝</div>
     </a>
   
 </nav>
@@ -129,7 +163,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 

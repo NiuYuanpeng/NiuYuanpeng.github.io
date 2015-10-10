@@ -5,16 +5,34 @@
   
   <title>文件操作之函数fputs和函数fgets | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
+  <meta name="description" content="文件操作之函数fputs和函数fgets####fgets函数
+
+最好的学习方法就是查手册，就是在iterm下使用man fgets，fputs以及其他一切不懂的函数或者其他的都可使用手册，就是man一下，你就知道。
+
+12char *  fgets(char * restrict str, int size, FILE * restrict stream
+
+含义：从文件指针stream所指的文件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="文件操作之函数fputs和函数fgets">
 <meta property="og:url" content="http://yoursite.com/2015/10/10/文件操作之函数fputs和函数fgets/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description">
-<meta property="og:updated_time" content="2015-10-10T03:43:15.000Z">
+<meta property="og:description" content="文件操作之函数fputs和函数fgets####fgets函数
+
+最好的学习方法就是查手册，就是在iterm下使用man fgets，fputs以及其他一切不懂的函数或者其他的都可使用手册，就是man一下，你就知道。
+
+12char *  fgets(char * restrict str, int size, FILE * restrict stream
+
+含义：从文件指针stream所指的文件">
+<meta property="og:updated_time" content="2015-10-10T09:04:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文件操作之函数fputs和函数fgets">
-<meta name="twitter:description">
+<meta name="twitter:description" content="文件操作之函数fputs和函数fgets####fgets函数
+
+最好的学习方法就是查手册，就是在iterm下使用man fgets，fputs以及其他一切不懂的函数或者其他的都可使用手册，就是man一下，你就知道。
+
+12char *  fgets(char * restrict str, int size, FILE * restrict stream
+
+含义：从文件指针stream所指的文件">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -82,11 +100,34 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="文件操作之函数fputs和函数fgets">文件操作之函数fputs和函数fgets</h1><p>####fgets函数</p>
+<ul>
+<li>最好的学习方法就是查手册，就是在iterm下使用man fgets，fputs以及其他一切不懂的函数或者其他的都可使用手册，就是man一下，你就知道。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> *</span><br><span class="line">  <span class="title">fgets</span><span class="params">(<span class="keyword">char</span> * <span class="keyword">restrict</span> str, <span class="keyword">int</span> size, FILE * <span class="keyword">restrict</span> stream</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>含义：从文件指针stream所指的文件中读取最多size－1个字符，并储存在字符数组str中，并追加一个’\0’字符。</li>
+</ul>
+<blockquote>
+<p>读取操作遭遇到换行符、文件结束或者错误时停止</p>
+</blockquote>
+<h4 id="fputs函数">fputs函数</h4><ul>
+<li>fputs函数使用前，依然可以使用手册</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span></span><br><span class="line">     <span class="title">fputs</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *<span class="keyword">restrict</span> s, FILE *<span class="keyword">restrict</span> stream)</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>含义：把字符串s中的内容写入文件指针stream所指向的文件中</li>
+</ul>
+<blockquote>
+<p>fputs不会自动添加‘\n’</p>
+</blockquote>
+<h4 id="总结">总结</h4><p>其实fputs与fgets在一起配合使用时效果最好，在使用时要注意返回值，fputs的返回值是int，而fgets的返回值是char＊。另外，fgets函数与fgetc函数的区别就在于：fgetc读的是字符，是一个一个读的，而fgets读的是字符串，每次读若干个，与定义有关。fputs函数与fputc函数的区别也是一样，下面是我做的一个小例子，从文件1读内容到文件2，需要手动输入你要进行操作的文件的路径:</p>
+<p>［代码］</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> SIZE <span class="number">36</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">const</span> <span class="keyword">char</span> *argv[])</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="comment">//定义两个文件指针</span></span><br><span class="line">    FILE *fp = <span class="literal">NULL</span>;</span><br><span class="line">    FILE *wfp = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="comment">//定义字符型数组,用以接受文件</span></span><br><span class="line">    <span class="keyword">char</span> ch[SIZE] = &#123;<span class="string">'\0'</span>&#125;;</span><br><span class="line">    <span class="comment">//判断用户的输入是否合法</span></span><br><span class="line">    <span class="keyword">if</span>(argc != <span class="number">3</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"puts error!\n"</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"please input the right path 命令字  路径1 路径2 \n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//打开文件</span></span><br><span class="line">    fp = fopen(argv[<span class="number">1</span>],<span class="string">"r"</span>);</span><br><span class="line">    wfp = fopen(argv[<span class="number">2</span>],<span class="string">"w"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//判断文件是否打开成功</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">NULL</span> == fp || <span class="literal">NULL</span> == wfp)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"file open error!\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//执行文件操作</span></span><br><span class="line">    <span class="keyword">while</span>(fgets(ch,SIZE,fp) != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fputs</span>(ch,wfp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"the file copy successful!\n"</span>);</span><br><span class="line">            </span><br><span class="line">    <span class="comment">//关闭文件</span></span><br><span class="line">    fclose(fp);</span><br><span class="line">    fclose(wfp);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/10/文件操作之函数fputs和函数fgets/" data-id="cifkjyw880006axnovsjl2ebc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/10/文件操作之函数fputs和函数fgets/" data-id="cifkv25i40006q5nop9arb4yz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -129,7 +170,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 

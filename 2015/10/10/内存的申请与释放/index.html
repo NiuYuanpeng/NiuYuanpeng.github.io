@@ -5,16 +5,22 @@
   
   <title>内存的申请与释放 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
+  <meta name="description" content="内存的申请与释放对于一段内存的数存，该如何解释，是依赖于数据类型,需要使用 malloc,其使用语法如下
+12void *    malloc(size_t size);
+函数 malloc 包含在头文件为 stdlib.h 的头文件中,使用前需要把它包含进来,其返回值是 void *,其含义是:返回值自定义,有我们用户决定,定义的是接收整型的内存,返回值就是整型的指针,定义的是接收字符型的内存,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="内存的申请与释放">
 <meta property="og:url" content="http://yoursite.com/2015/10/10/内存的申请与释放/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description">
-<meta property="og:updated_time" content="2015-10-10T03:41:54.000Z">
+<meta property="og:description" content="内存的申请与释放对于一段内存的数存，该如何解释，是依赖于数据类型,需要使用 malloc,其使用语法如下
+12void *    malloc(size_t size);
+函数 malloc 包含在头文件为 stdlib.h 的头文件中,使用前需要把它包含进来,其返回值是 void *,其含义是:返回值自定义,有我们用户决定,定义的是接收整型的内存,返回值就是整型的指针,定义的是接收字符型的内存,">
+<meta property="og:updated_time" content="2015-10-10T09:02:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内存的申请与释放">
-<meta name="twitter:description">
+<meta name="twitter:description" content="内存的申请与释放对于一段内存的数存，该如何解释，是依赖于数据类型,需要使用 malloc,其使用语法如下
+12void *    malloc(size_t size);
+函数 malloc 包含在头文件为 stdlib.h 的头文件中,使用前需要把它包含进来,其返回值是 void *,其含义是:返回值自定义,有我们用户决定,定义的是接收整型的内存,返回值就是整型的指针,定义的是接收字符型的内存,">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -82,11 +88,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="内存的申请与释放">内存的申请与释放</h3><p>对于一段内存的数存，该如何解释，是依赖于数据类型,需要使用 malloc,其使用语法如下</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> *</span><br><span class="line">    <span class="title">malloc</span><span class="params">(size_t size)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>函数 malloc 包含在头文件为 stdlib.h 的头文件中,使用前需要把它包含进来,其返回值是 void *,其含义是:返回值自定义,有我们用户决定,定义的是接收整型的内存,返回值就是整型的指针,定义的是接收字符型的内存,返回值就是字符型的指针.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ＊pMyInt ＝ （<span class="keyword">int</span>＊）<span class="built_in">malloc</span>（<span class="keyword">sizeof</span>（<span class="keyword">int</span>））</span><br></pre></td></tr></table></figure>
+<p>在这里，我们使用的是int＊，所以，malloc分配的空间所存储的类型就是int型，其声明的pMyInt所指向的事malloc所份哦诶内存的首地址</p>
+<p>内存分配之后，要判断内存是否申请成功。在这里，我们使用if语句判断:若内存为空,则证明内存申请成功,否则,需要终止程序.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">NULL</span> != myString)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Allocate memory error!"</span>);</span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p>内存申请成功后,需要对内存进行初始化,需要使用 memset 函数,其存在的库为 String, 所以文件要包含 String.h 这个头文件,其基本语法:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> *</span><br><span class="line">     <span class="title">memset</span><span class="params">(<span class="keyword">void</span> *b, <span class="keyword">int</span> c, size_t len)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>memset 的功能是实现内存的初始化, void *b 是字符串数组的名字,也是地址, c 是具体的地址, len 是指的字符的个数,下面就是一个实例, myString 是字符数组的名字,0x00是初始化的首地址, nSize 是申请的个数,可以是具体值,这里的是根据用户的输入而设定的一个值.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">memset</span>(myString,<span class="number">0x00</span>,nSize);</span><br></pre></td></tr></table></figure>
+<p>接下来就是要由用户输入想要的字符个数,以及字符.在苹果 Mac 下的 Iterm 中,用苹果的键盘输入的话,会涉及到键盘缓冲区的概念.具体就是输入字符时,需要输入一个字符,然后换行,再输下一个,当从循环中再次执行时,系统就会默认遇到回车键,就是’\n’, 这时候就会跳过去此次循环.等到下次在执行是才会继续让输入,本质就是每隔一个字符存放位存放,导致内存浪费,用户的目的也达不到.</p>
+<p>于是, fpurge 函数就应运而生了,其语法结构为</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span></span><br><span class="line">     <span class="title">fpurge</span><span class="params">(FILE *stream)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>fpurge函数的作用是刷新文件流,当用 fpurge(stdin); 时,就是刷新键盘的输入缓冲区,这样就不存在’\n’ 的问题啦</p>
+<p>内存使用之后,一定要记得释放掉内存,因为 malloc 申请的内存是从堆中申请的,是用户唯一能手动管理的内存部分,如果使用后不释放掉,就会一直占用内存.长此以往,我们将会无内存可用</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free<span class="list">(<span class="keyword">myString</span>)</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>释放完内存后,需要把前面定义的字符型指针给释放掉.愿意很简单,不设为空的话,后面在调用指针 myString 时,它仍指向 malloc 分配的内存首部,然而 malloc 分配的内存已经释放掉了,这样就会出现错误.</p>
+<p>以下就是我在学习内存分配中写的小例子:</p>
+<blockquote>
+<p>它是在苹果的系统下的 Iterm 中运行的.它使用了 argv[1],指的是在命令行输入的第二个字符</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"> <span class="number">1</span> <span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> <span class="number">2</span> <span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"> <span class="number">3</span> <span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"> <span class="number">4</span> </span><br><span class="line"> <span class="number">5</span> <span class="comment">//根据用户从键盘输入的内容，然后在屏幕上打印</span></span><br><span class="line"> <span class="number">6</span> </span><br><span class="line"> <span class="number">7</span> <span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">const</span> <span class="keyword">char</span> *argv[])</span></span><br><span class="line"> 8 </span>&#123;</span><br><span class="line"> <span class="number">9</span>     <span class="keyword">char</span> *myString = <span class="literal">NULL</span>;</span><br><span class="line"><span class="number">10</span>     <span class="keyword">char</span> myChar;</span><br><span class="line"><span class="number">11</span>     <span class="keyword">int</span> j =<span class="number">0</span>;</span><br><span class="line"><span class="number">12</span>     myChar = fgetc(<span class="built_in">stdin</span>);</span><br><span class="line"><span class="number">13</span>     <span class="keyword">int</span> nSize = atoi(argv[<span class="number">1</span>]);</span><br><span class="line"><span class="number">14</span> </span><br><span class="line"><span class="number">15</span>     myString = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>) * nSize);</span><br><span class="line"><span class="number">16</span>     <span class="comment">//内存申请好之后，需要判断是否为空，若为空，则证明内存申请成功</span></span><br><span class="line"><span class="number">17</span>     <span class="keyword">if</span> (<span class="literal">NULL</span> != myString)</span><br><span class="line"><span class="number">18</span>     &#123;</span><br><span class="line"><span class="number">19</span>         <span class="built_in">printf</span>(<span class="string">"Allocate memory error!"</span>);</span><br><span class="line"><span class="number">20</span>         <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line"><span class="number">21</span>     &#125;</span><br><span class="line"><span class="number">22</span>     <span class="comment">//内存分配好之后，需要进行内存的初始化</span></span><br><span class="line"><span class="number">23</span>     <span class="built_in">memset</span>(myString,<span class="number">0x00</span>,nSize);</span><br><span class="line"><span class="number">24</span>     <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; nSize;i++)</span><br><span class="line"><span class="number">25</span>     &#123;</span><br><span class="line"><span class="number">26</span>         <span class="comment">//使用 fpurge 来清空键盘缓冲区中的记忆</span></span><br><span class="line"><span class="number">27</span>         fpurge(<span class="built_in">stdin</span>);</span><br><span class="line"><span class="number">28</span>         myString[i] = myChar;</span><br><span class="line"><span class="number">29</span>         myChar = fgetc(<span class="built_in">stdin</span>);</span><br><span class="line"><span class="number">30</span>     &#125;</span><br><span class="line"><span class="number">31</span> </span><br><span class="line"><span class="number">32</span>     <span class="built_in">printf</span>(<span class="string">"the myString is %s\n"</span>,myString);</span><br><span class="line"><span class="number">33</span> <span class="comment">//内存使用之后,一定要记得释放掉内存,因为 malloc 申请下的内存都是在堆中申请的,如果不释放掉, 会一直占用内存空间,长此以往,我们将没有可用的内存</span></span><br><span class="line"><span class="number">34</span>     <span class="built_in">free</span>(myString);</span><br><span class="line"><span class="number">35</span>     <span class="comment">//此处把 myString 设为空的原因就是,如果不设为空,后面在重新使用时, myString 仍指向原来的地址,而那地址里的内容已释放,就会出现错误,所以 myString 设为空</span></span><br><span class="line"><span class="number">36</span>     myString = <span class="literal">NULL</span>;</span><br><span class="line"><span class="number">37</span>     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"><span class="number">38</span> </span><br><span class="line"><span class="number">39</span> &#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/10/内存的申请与释放/" data-id="cifkjyw8x000haxnou8z3vtqf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/10/内存的申请与释放/" data-id="cifkv25is000gq5nol2uk33cv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -129,7 +157,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 

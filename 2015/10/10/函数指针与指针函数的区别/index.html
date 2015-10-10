@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>函数指针与指针函数的区别 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="指针函数和函数指针指针函数
+指针函数是返回值是指针的函数,其本质就是一个函数.
+类型标示符  *函数名 ( 参数表 ),下面是一个例子:
+
+1int *f(x,y);
+
+指针函数一定由函数值,且该返回值必须用同类型的指针边量来接受,下面是一个例子:
+
+123double *function();  vs  double (*function)();double *p;p = function();">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数指针与指针函数的区别">
+<meta property="og:url" content="http://yoursite.com/2015/10/10/函数指针与指针函数的区别/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="指针函数和函数指针指针函数
+指针函数是返回值是指针的函数,其本质就是一个函数.
+类型标示符  *函数名 ( 参数表 ),下面是一个例子:
+
+1int *f(x,y);
+
+指针函数一定由函数值,且该返回值必须用同类型的指针边量来接受,下面是一个例子:
+
+123double *function();  vs  double (*function)();double *p;p = function();">
+<meta property="og:updated_time" content="2015-10-10T03:06:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="函数指针与指针函数的区别">
+<meta name="twitter:description" content="指针函数和函数指针指针函数
+指针函数是返回值是指针的函数,其本质就是一个函数.
+类型标示符  *函数名 ( 参数表 ),下面是一个例子:
+
+1int *f(x,y);
+
+指针函数一定由函数值,且该返回值必须用同类型的指针边量来接受,下面是一个例子:
+
+123double *function();  vs  double (*function)();double *p;p = function();">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-函数指针与指针函数的区别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/10/函数指针与指针函数的区别/" class="article-date">
+  <time datetime="2015-10-10T03:05:59.000Z" itemprop="datePublished">2015-10-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      函数指针与指针函数的区别
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="指针函数和函数指针">指针函数和函数指针</h1><h3 id="指针函数">指针函数</h3><ul>
+<li>指针函数是返回值是指针的函数,其本质就是一个函数.</li>
+<li>类型标示符  *函数名 ( 参数表 ),下面是一个例子:</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> *<span class="title">f</span><span class="params">(x,y)</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>指针函数一定由函数值,且该返回值必须用同类型的指针边量来接受,下面是一个例子:</li>
+</ul>
+<figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> *<span class="function"><span class="keyword">function</span><span class="params">()</span></span>;  vs  <span class="keyword">double</span> (*<span class="function"><span class="keyword">function</span>)<span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">double</span> *p;</span><br><span class="line">p = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p> 上面是两种声明形式生命的是不同的内容,左边一个是指针函数,右边的是函数指针,怎么区分呢?<br> 其实道理很简单,就看下未明身份的字符前面的<em>是否在括号里,像左边的, function 大家是认识的,就是函数的意思,假如大家遇到一个不认识的词,就看它前面的 </em>有没有和它同在一个括号里,不在,就是指针函数,在的话,就是函数指针.</p>
+<h3 id="函数指针">函数指针</h3><ul>
+<li>函数指针是<strong>指向函数</strong>的指针,一次,本质上是一个是指针变量</li>
+</ul>
+<figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> (*f)(<span class="keyword">int</span>);<span class="comment">//声明一个函数指针</span></span><br><span class="line">f = <span class="function"><span class="keyword">function</span></span>;<span class="comment">// 赋值(将函数( function) 赋值给指针 f)</span></span><br><span class="line">ret = f(<span class="number">6</span>);<span class="comment">//调用(通过函数指针调用函数)</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-函数指针_-_赋值">1.函数指针 - 赋值</h4><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f = &amp;<span class="function"><span class="keyword">function</span></span>;</span><br><span class="line">f = <span class="function"><span class="keyword">function</span></span>;</span><br><span class="line">f();<span class="comment">// 通过函数指针调用函数</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-函数指针_-_调用">2.函数指针 - 调用</h4><p>-通过指针调用函数,可以采用以下两种形式:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>ret = (*f)(<span class="number">6</span>);<span class="comment">//明确指出通过读取指针变量调用函数</span></span><br><span class="line"><span class="number">2.</span>ret = f(<span class="number">6</span>);</span><br><span class="line"></span><br><span class="line">f();<span class="comment">//通过函数指针调用函数</span></span><br></pre></td></tr></table></figure>
+<h4 id="如何区分">如何区分</h4><p>函数名前面的星号*有没有被括号()包含</p>
+<p>包含,就是函数指针</p>
+<p>没包含,就是指针函数</p>
+<p>下面举一个例子:</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int<span class="comment">(*(*function)(int*)</span>)[<span class="number">10</span>];</span><br></pre></td></tr></table></figure>
+<p>擦,这可怎么理解啊!肯定会有人这么说,其实要想理解这个”东西” 逻辑就需要使用左右法则,又称为右左法则.</p>
+<p><strong>左右法则</strong></p>
+<ul>
+<li><p>The right-left rule: Start reading the declaration from the innermost parentheses, go right, and then go left. When you encounter parentheses, the direction should be reversed. Once everything in the parentheses has been parsed, jump out of it. Continue till the whole declaration has been parsed.</p>
+</li>
+<li><p>左右法则: 首先从最里面的圆括号(<strong>未定义的标示符</strong>)看起,然后向右看,再向左看.每当遇到圆括号时,就应该调转阅读方向.一旦解析完圆括号里面的所有的东西,就跳出圆括号.重复这个过程直到整个声明解析完毕.</p>
+</li>
+</ul>
+<p>例子</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span>(*<span class="function"><span class="keyword">function</span></span>)(<span class="built_in">int</span> *p);</span><br></pre></td></tr></table></figure>
+<p>首先, function 是未定义的标示符,先向右看,是圆括号,再向左看,前面有一个<em>号,那么 function 就是一个指针,跳出圆括号.再向右看又是一个括号,说明( </em> function)是一个函数,并且是一个函数指针,其参数是 一个整形的指针,返回值也是整形;</p>
+<p>例子</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int<span class="comment">(*function)(int *p,int (*fun(int*)</span>));</span><br></pre></td></tr></table></figure>
+<p>判断方法,先看 function前面有一个*,后面有一个括号,所以,它是一个函数指针,函数的内容有一个整型的指针 p, 还有一个什么呢?</p>
+<p>在分析 f, 前面有一个*,后面有一个括号,说明 f 是一个函数指针,函数内有有一个整型的地址,返回值是整型.</p>
+<p>所以,总的来说, function 是一个函数指针,其函数体内有一个整型的地址,还有一个函数指针,里面的函数指针里也有一个整型的指针,返回值为int,function 的返回值也是整型.</p>
+<p>例子</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> (*func[<span class="number">5</span>])(<span class="keyword">int</span> *p);</span><br></pre></td></tr></table></figure>
+<p>判断方法, func 是一个数组,前面有*,所以是一个存放地址的数组,后面还有圆括号,所以又是一个函数指针,是一个存放是一个存放数组地址的函数指针,看后面的括号,存放的是整型的指针指向的地址.再向前看, int返回值</p>
+<p>再来个复杂的</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int <span class="list">(<span class="keyword">*</span><span class="list">(<span class="keyword">*func</span>)</span>[<span class="number">5</span>])</span><span class="list">(<span class="keyword">int</span> <span class="variable">*p);</span></span></span><br></pre></td></tr></table></figure>
+<p>判断方法, func 是一个指针(前面有*),跳出最近的括号,是一个数组,这就变的和上面一样了,也是一个函数指针只不过是一个指针数组,里面存放的是整型指针的地址,,返回值是 int</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/10/10/函数指针与指针函数的区别/" data-id="cifki4p5v00042ynosue6blpa" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/10/10/类别/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          类别
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/10/10/初始化-之-开箱即用和懒加载/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">初始化 之 开箱即用和懒加载</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/10/10/类别/">类别</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/10/函数指针与指针函数的区别/">函数指针与指针函数的区别</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/10/初始化-之-开箱即用和懒加载/">初始化 之 开箱即用和懒加载</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/10/便利初始化方法和指定初始化方法/">便利初始化方法和指定初始化方法</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/10/手势识别器概述/">手势识别器概述</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

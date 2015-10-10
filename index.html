@@ -61,6 +61,216 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-类别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/10/类别/" class="article-date">
+  <time datetime="2015-10-10T03:06:34.000Z" itemprop="datePublished">2015-10-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/10/类别/">类别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="类别">类别</h2><ul>
+<li>为现有的类(自定义的类、第三方的类或者是系统定义的类)添加一些新的行为</li>
+<li>Objective－C的动态运行时的分配机制</li>
+<li>为现有类添加新的行为，通常也可以采用创建子类的方法，但是它是有限制的，如现有的类你没有源代码，或者现有的类是以类簇的形式存在。都无法添加新的行为。</li>
+<li>不能为现有类添加成员变量</li>
+<li>类别的类的优先级都是极高的(没有系统定义的高)</li>
+</ul>
+<h4 id="声明和实现类别">声明和实现类别</h4><ul>
+<li>类别代码习惯放在独立的文件中,通常会以”类名称+类别名称”的风格命名.这并不是硬性规定,而是一个好的习惯.如: NSString+NumberConvenience. 其含义是为现有类 NSString 添加一个名为 NumberConvenience 的类别</li>
+<li>只要保证类别名唯一,可以像一个类中添加任意数量的类别.</li>
+<li>XCode 提供有创建类别的模板</li>
+</ul>
+<p>声明类别   </p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSString</span> (<span class="title">NSNumberConvience</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//为现有的类(NSString）添加一个新的方法</span></span><br><span class="line">- (<span class="built_in">NSNumber</span>*)lenthAsNumber;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>这个声明有两个特点：<br>      (1)现有的类位于@interface关键字之后，然后是位于括号中的类别名称。<br>         他表示：向NSString类中添加一个名称为NumberConvenience的类别<br>         同名类别有唯一性，但是可以添加任意多的不同名类别<br>      (2)可以执行希望向其添加类别的类以及类别的名称，还可以列出添加的方法<br>         不可以添加新的实例变量，类别生命中没有实例变量部分<br>类别的实现   </p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSString</span> (<span class="title">NSNumberConvience</span>)</span></span><br><span class="line"></span><br><span class="line">- (<span class="built_in">NSNumber</span>*)lenthAsNumber</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSUInteger</span> length = [<span class="keyword">self</span> length];</span><br><span class="line">    <span class="keyword">return</span> [<span class="built_in">NSNumber</span> numberWithUnsignedLong:length];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<h4 id="类别的优缺点">类别的优缺点</h4><p>1.缺点   </p>
+<pre><code><span class="bullet">* </span>无法向类别中添加新的实例变量    
+<span class="bullet">* </span>名称冲突. 注意:类别具有较高的优先级   
+</code></pre><p>2.优点   </p>
+<pre><code><span class="keyword">*</span> 可以将类的实现代码分散到多个不同的文件或框架中,方便一个大的工程的实现,有多个人来做属于他的那一部分   
+<span class="keyword">*</span> 创建对私有方法的前向引用   
+<span class="keyword">*</span>向对象添加非正式协议
+</code></pre><h2 id="类别的扩展">类别的扩展</h2><ul>
+<li><strong>没有名字</strong>的类别</li>
+<li>可以再源代码类类里使用</li>
+<li>可以添加实例变量,作为类的私有变量</li>
+<li>可以将只读权限改成可读写的权限</li>
+<li>创建数量不限</li>
+</ul>
+<p>下面举一个例子,新建一个类 Things 继承与超类 NSObject,头文件内容如下: </p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Things</span> : <span class="title">NSObject</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>) <span class="built_in">NSUInteger</span> thing1;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>,<span class="keyword">readonly</span>) <span class="built_in">NSUInteger</span> thing2;</span><br><span class="line"><span class="comment">//thing2是只读的</span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)resetAllValues;</span><br><span class="line">- (<span class="keyword">void</span>)print; </span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>在类的实现文件中代码如下:   </p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"Things.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//用没有名字的类别， 来实现类的扩展</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Things</span> ()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSUInteger</span> thing4;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">assign</span>) <span class="built_in">NSUInteger</span> thing3;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>,<span class="keyword">readwrite</span>) <span class="built_in">NSUInteger</span> thing2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Things</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)resetAllValues</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.thing1</span> = <span class="number">100</span>;</span><br><span class="line"><span class="comment">//正是因为我们改变thing2属性， 让其成为为可读写的， 所以这里才可以给其赋值</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.thing2</span> = <span class="number">200</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.thing3</span> = <span class="number">300</span>;</span><br><span class="line">    thing4 = <span class="number">400</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)print</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%ld,%ld,%ld,%ld"</span>,<span class="keyword">self</span><span class="variable">.thing1</span>,<span class="keyword">self</span><span class="variable">.thing2</span>,<span class="keyword">self</span><span class="variable">.thing3</span>,thing4);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>在 main()中的代码如下:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#import &lt;Foundation/Foundation.h&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#import <span class="string">"Things.h"</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>&#123;</span><br><span class="line">    @autoreleasepool &#123;</span><br><span class="line">        Things *th = [[Things alloc] init];</span><br><span class="line"><span class="comment">//        虽然类扩展里里将thing2改成读写属性， 但在外界面使用的时候， 还是主类的属性</span></span><br><span class="line"><span class="comment">//        th.thing2 = 200;</span></span><br><span class="line">        [th resetAllValues];</span><br><span class="line">        [th print];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码的结果为:100,200,300,400.<br>实现了对 readonly 的成员变量 thing2的值的改写,但是只能在其类别的实现文件中改写,在此外 thing2仍是只读的.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/10/10/类别/" data-id="cifki4p5j00012ynotvglqkd1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-函数指针与指针函数的区别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/10/函数指针与指针函数的区别/" class="article-date">
+  <time datetime="2015-10-10T03:05:59.000Z" itemprop="datePublished">2015-10-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/10/函数指针与指针函数的区别/">函数指针与指针函数的区别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="指针函数和函数指针">指针函数和函数指针</h1><h3 id="指针函数">指针函数</h3><ul>
+<li>指针函数是返回值是指针的函数,其本质就是一个函数.</li>
+<li>类型标示符  *函数名 ( 参数表 ),下面是一个例子:</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> *<span class="title">f</span><span class="params">(x,y)</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>指针函数一定由函数值,且该返回值必须用同类型的指针边量来接受,下面是一个例子:</li>
+</ul>
+<figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> *<span class="function"><span class="keyword">function</span><span class="params">()</span></span>;  vs  <span class="keyword">double</span> (*<span class="function"><span class="keyword">function</span>)<span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">double</span> *p;</span><br><span class="line">p = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<p> 上面是两种声明形式生命的是不同的内容,左边一个是指针函数,右边的是函数指针,怎么区分呢?<br> 其实道理很简单,就看下未明身份的字符前面的<em>是否在括号里,像左边的, function 大家是认识的,就是函数的意思,假如大家遇到一个不认识的词,就看它前面的 </em>有没有和它同在一个括号里,不在,就是指针函数,在的话,就是函数指针.</p>
+<h3 id="函数指针">函数指针</h3><ul>
+<li>函数指针是<strong>指向函数</strong>的指针,一次,本质上是一个是指针变量</li>
+</ul>
+<figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> (*f)(<span class="keyword">int</span>);<span class="comment">//声明一个函数指针</span></span><br><span class="line">f = <span class="function"><span class="keyword">function</span></span>;<span class="comment">// 赋值(将函数( function) 赋值给指针 f)</span></span><br><span class="line">ret = f(<span class="number">6</span>);<span class="comment">//调用(通过函数指针调用函数)</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-函数指针_-_赋值">1.函数指针 - 赋值</h4><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f = &amp;<span class="function"><span class="keyword">function</span></span>;</span><br><span class="line">f = <span class="function"><span class="keyword">function</span></span>;</span><br><span class="line">f();<span class="comment">// 通过函数指针调用函数</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-函数指针_-_调用">2.函数指针 - 调用</h4><p>-通过指针调用函数,可以采用以下两种形式:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>ret = (*f)(<span class="number">6</span>);<span class="comment">//明确指出通过读取指针变量调用函数</span></span><br><span class="line"><span class="number">2.</span>ret = f(<span class="number">6</span>);</span><br><span class="line"></span><br><span class="line">f();<span class="comment">//通过函数指针调用函数</span></span><br></pre></td></tr></table></figure>
+<h4 id="如何区分">如何区分</h4><p>函数名前面的星号*有没有被括号()包含</p>
+<p>包含,就是函数指针</p>
+<p>没包含,就是指针函数</p>
+<p>下面举一个例子:</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int<span class="comment">(*(*function)(int*)</span>)[<span class="number">10</span>];</span><br></pre></td></tr></table></figure>
+<p>擦,这可怎么理解啊!肯定会有人这么说,其实要想理解这个”东西” 逻辑就需要使用左右法则,又称为右左法则.</p>
+<p><strong>左右法则</strong></p>
+<ul>
+<li><p>The right-left rule: Start reading the declaration from the innermost parentheses, go right, and then go left. When you encounter parentheses, the direction should be reversed. Once everything in the parentheses has been parsed, jump out of it. Continue till the whole declaration has been parsed.</p>
+</li>
+<li><p>左右法则: 首先从最里面的圆括号(<strong>未定义的标示符</strong>)看起,然后向右看,再向左看.每当遇到圆括号时,就应该调转阅读方向.一旦解析完圆括号里面的所有的东西,就跳出圆括号.重复这个过程直到整个声明解析完毕.</p>
+</li>
+</ul>
+<p>例子</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span>(*<span class="function"><span class="keyword">function</span></span>)(<span class="built_in">int</span> *p);</span><br></pre></td></tr></table></figure>
+<p>首先, function 是未定义的标示符,先向右看,是圆括号,再向左看,前面有一个<em>号,那么 function 就是一个指针,跳出圆括号.再向右看又是一个括号,说明( </em> function)是一个函数,并且是一个函数指针,其参数是 一个整形的指针,返回值也是整形;</p>
+<p>例子</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int<span class="comment">(*function)(int *p,int (*fun(int*)</span>));</span><br></pre></td></tr></table></figure>
+<p>判断方法,先看 function前面有一个*,后面有一个括号,所以,它是一个函数指针,函数的内容有一个整型的指针 p, 还有一个什么呢?</p>
+<p>在分析 f, 前面有一个*,后面有一个括号,说明 f 是一个函数指针,函数内有有一个整型的地址,返回值是整型.</p>
+<p>所以,总的来说, function 是一个函数指针,其函数体内有一个整型的地址,还有一个函数指针,里面的函数指针里也有一个整型的指针,返回值为int,function 的返回值也是整型.</p>
+<p>例子</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> (*func[<span class="number">5</span>])(<span class="keyword">int</span> *p);</span><br></pre></td></tr></table></figure>
+<p>判断方法, func 是一个数组,前面有*,所以是一个存放地址的数组,后面还有圆括号,所以又是一个函数指针,是一个存放是一个存放数组地址的函数指针,看后面的括号,存放的是整型的指针指向的地址.再向前看, int返回值</p>
+<p>再来个复杂的</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int <span class="list">(<span class="keyword">*</span><span class="list">(<span class="keyword">*func</span>)</span>[<span class="number">5</span>])</span><span class="list">(<span class="keyword">int</span> <span class="variable">*p);</span></span></span><br></pre></td></tr></table></figure>
+<p>判断方法, func 是一个指针(前面有*),跳出最近的括号,是一个数组,这就变的和上面一样了,也是一个函数指针只不过是一个指针数组,里面存放的是整型指针的地址,,返回值是 int</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/10/10/函数指针与指针函数的区别/" data-id="cifki4p5v00042ynosue6blpa" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-初始化-之-开箱即用和懒加载" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/10/初始化-之-开箱即用和懒加载/" class="article-date">
+  <time datetime="2015-10-10T03:05:11.000Z" itemprop="datePublished">2015-10-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/10/初始化-之-开箱即用和懒加载/">初始化 之 开箱即用和懒加载</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="初始化">初始化</h3><h4 id="对象分配内存">对象分配内存</h4><h5 id="+_(id)_alloc;">+ (id) alloc;</h5><ul>
+<li>对象的诞生过程,主要是从操作系统获得一块足够大的内存,以存放该类的全部实例变量,并将其指定为         存放对象的实例变量的位置.</li>
+<li>alloc方法同时将这块内存区域全部设置为0.(由于其他语言没有初始化带来了很多问题),结果是: BOOL 变量初始值为 NO, 所有的 int 类型变量为0,float 变量为0.0,所有的指针为 nil.</li>
+</ul>
+<h4 id="初始化对象">初始化对象</h4><h5 id="-_(id)_init;">- (id) init;</h5><ul>
+<li>初始化的功能就是保障我们的实例变量是可用的完整对象,如: 我们在初始化中给类中依赖的其它的实例变量赋值</li>
+<li>有两种初始化思想.第一种就是初始化方法中将所有相依赖的对象全部创建并赋值,”开箱即用”;第二种是惰性求值,就是在初始化的时候先占位,在使用的时候,在确认具体的值.这两种方法需要根据业务来进行取舍.</li>
+<li>初始化方法的编写习惯:</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (id)<span class="keyword">init</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> <span class="keyword">init</span>])&#123;</span><br><span class="line">	</span><br><span class="line">	   <span class="comment">//do something init content...</span></span><br><span class="line">	   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="开箱即用的初始化方式">开箱即用的初始化方式</h5><p>个人理解就是把初始化的过程放到了方法中,应该说是封装到了方法中,当使用时,只需要调用此方法就能实现对象的初始化.并且,此时不需要setter,getter 方法的声明与实现</p>
+<p>直接在对应的实现文件中定义:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//开箱即用</span></span><br><span class="line">- (id)<span class="keyword">init</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> <span class="keyword">init</span>]) &#123;</span><br><span class="line">        engine = [[<span class="type">QYEngine</span> alloc] <span class="keyword">init</span>];</span><br><span class="line">        </span><br><span class="line">        tires = [[<span class="type">NSMutableArray</span> alloc] initWithCapacity:<span class="number">4</span>];</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">            <span class="type">QYTire</span> *tire = [[<span class="type">QYTire</span> alloc] <span class="keyword">init</span>];</span><br><span class="line">            [tires addObject:tire];</span><br><span class="line">            [tire release];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;<span class="comment">//开箱即用</span></span><br></pre></td></tr></table></figure>
+<p>调用时也非常简单,这届在主函数中调用即可   </p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#import <span class="title">"QYCar.h"</span></span></span><br><span class="line"><span class="preprocessor">#import <span class="title">"QYEngine.h"</span></span></span><br><span class="line"><span class="preprocessor">#import <span class="title">"QYTire.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[]) &#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">       <span class="comment">//开箱即用</span></span><br><span class="line">       QYCar *myCar = [[QYCar alloc] init];</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"Car info: %@"</span>,myCar);</span><br><span class="line">        [myCar release];</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然,代码并不完整,只需要在相应的实现文件中实现部分打印功能即可<br>输出的结果如下<br>Car info: I am engine,(<br>    “I am tire”,<br>    “I am tire”,<br>    “I am tire”,<br>    “I am tire”<br>)<br>2015-06-28 21:26:28.068 InitDemo[2276:1416754] car destory<br>2015-06-28 21:26:29.251 InitDemo[2276:1416754] engine destory<br>2015-06-28 21:26:29.251 InitDemo[2276:1416754] tire destory<br>2015-06-28 21:26:30.187 InitDemo[2276:1416754] tire destory<br>2015-06-28 21:26:31.621 InitDemo[2276:1416754] tire destory</p>
+<h5 id="懒加载初始化方式">懒加载初始化方式</h5><p>感觉懒加载的方式比较麻烦,他不仅需要 setter,getter 方法的声明和定义,还需要在具体调用时进行现场的初始化方式</p>
+<p>懒加载的初始化方式具体实现,在对应的实现文件中:</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//懒加载</span></span><br><span class="line">- (<span class="keyword">id</span>)init&#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> init];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">        tires = [[<span class="built_in">NSMutableArray</span> alloc] initWithCapacity:<span class="number">4</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">            tires[i] = [<span class="built_in">NSNull</span> null];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)setEngine:(QYEngine *)newEngine&#123;</span><br><span class="line">    [newEngine retain];</span><br><span class="line">    [engine release];</span><br><span class="line">    engine = newEngine;</span><br><span class="line">&#125;</span><br><span class="line">- (QYEngine*)engine&#123;</span><br><span class="line">    <span class="keyword">return</span> engine;</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)setTire:(QYTire *)newTire atIndex:(<span class="built_in">NSUInteger</span>)index</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">//数组的使用会使tires的引用计数器加1</span></span><br><span class="line"><span class="comment">//    [newTire retain];</span></span><br><span class="line"><span class="comment">//    [tires[index] release];</span></span><br><span class="line">    tires[index] = newTire;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">- (QYTire*)tireAtIndex:(<span class="built_in">NSUInteger</span>)index&#123;</span><br><span class="line">    <span class="keyword">return</span> tires[index];</span><br><span class="line">&#125;<span class="comment">//懒加载</span></span><br></pre></td></tr></table></figure>
+<p>main() 中的代码也同样不少,其输出结果与上面相同.</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="atom">int</span> <span class="atom">main</span>(<span class="atom">int</span> <span class="atom">argc</span>, <span class="atom">const</span> <span class="atom">char</span> * <span class="atom">argv</span>[]) &#123;</span><br><span class="line">    @<span class="atom">autoreleasepool</span> &#123;</span><br><span class="line">       //懒加载</span><br><span class="line">        <span class="name">QYCar</span> *<span class="atom">myCar</span> = [[<span class="name">QYCar</span> <span class="atom">alloc</span>] <span class="atom">init</span>];</span><br><span class="line">        <span class="name">QYEngine</span> *<span class="atom">engine</span> = [[<span class="name">QYEngine</span> <span class="atom">alloc</span>] <span class="atom">init</span>];</span><br><span class="line">        </span><br><span class="line">        [<span class="atom">myCar</span> <span class="atom">setEngine</span>:<span class="atom">engine</span>];</span><br><span class="line">        [<span class="atom">engine</span> <span class="atom">release</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="atom">for</span> (<span class="atom">int</span> <span class="atom">i</span> = <span class="number">0</span>; <span class="atom">i</span> &lt; <span class="number">4</span>; <span class="atom">i</span>++) &#123;</span><br><span class="line">            <span class="name">QYTire</span> *<span class="atom">tire</span> = [[<span class="name">QYTire</span> <span class="atom">alloc</span>] <span class="atom">init</span>];</span><br><span class="line">            [<span class="atom">myCar</span> <span class="atom">setTire</span>:<span class="atom">tire</span> <span class="atom">atIndex</span>:<span class="atom">i</span>];</span><br><span class="line">            [<span class="atom">tire</span> <span class="atom">release</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="name">NSLog</span>(@<span class="string">"Car info: %@"</span>,<span class="atom">myCar</span>);</span><br><span class="line">        [<span class="atom">myCar</span> <span class="atom">release</span>];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/10/10/初始化-之-开箱即用和懒加载/" data-id="cifki4p5t00032ynomrafxrem" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-便利初始化方法和指定初始化方法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/10/10/便利初始化方法和指定初始化方法/" class="article-date">
@@ -110,7 +320,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/10/便利初始化方法和指定初始化方法/" data-id="cifkhzezh000210no5dfx2ggj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/10/便利初始化方法和指定初始化方法/" data-id="cifki4p5w00052yno7wyticni" class="article-share-link">Share</a>
       
       
     </footer>
@@ -203,7 +413,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/10/手势识别器概述/" data-id="cifkhzeza000110nouf4kksxg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/10/手势识别器概述/" data-id="cifki4p5q00022yno40likqbk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -248,7 +458,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/09/hello-world/" data-id="cifkhzezj000310nomuoh492n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/09/hello-world/" data-id="cifki4p5y00062ynouy1mityh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -294,7 +504,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/10/KVC 补充及实例/" data-id="cifkhzeyi000010nokoawqxsq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/10/KVC 补充及实例/" data-id="cifki4p4q00002ynovrzkdwuf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -319,7 +529,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -331,19 +541,23 @@
       <ul>
         
           <li>
+            <a href="/2015/10/10/类别/">类别</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/10/函数指针与指针函数的区别/">函数指针与指针函数的区别</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/10/初始化-之-开箱即用和懒加载/">初始化 之 开箱即用和懒加载</a>
+          </li>
+        
+          <li>
             <a href="/2015/10/10/便利初始化方法和指定初始化方法/">便利初始化方法和指定初始化方法</a>
           </li>
         
           <li>
             <a href="/2015/10/10/手势识别器概述/">手势识别器概述</a>
-          </li>
-        
-          <li>
-            <a href="/2015/10/09/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2015/07/10/KVC 补充及实例/">KVC 补充及实例</a>
           </li>
         
       </ul>
